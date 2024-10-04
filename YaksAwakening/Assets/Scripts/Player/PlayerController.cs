@@ -25,13 +25,20 @@ public class PlayerController : MonoBehaviour
 
         inputActions = new PlayerInputActions();
 
+
+    }
+
+    private void Start()
+    {
+        GameState.Instance.OnGameResumed.AddListener(OnGameResumedCallback);
+        GameState.Instance.OnGamePaused.AddListener(OnGamePausedCallback);
     }
 
     private void OnEnable()
     {
         SubscribeInputActions();
 
-        inputActions.Player.Enable();
+        SwitchActionMap("Player");
 
     }
 
@@ -39,7 +46,13 @@ public class PlayerController : MonoBehaviour
     {
         UnSubscribeInputActions();
 
-        inputActions.Player.Disable();
+        SwitchActionMap();
+    }
+
+    private void OnDestroy()
+    {
+        GameState.Instance.OnGamePaused.RemoveListener(OnGamePausedCallback);
+        GameState.Instance.OnGameResumed.RemoveListener(OnGameResumedCallback);
     }
 
     #endregion
@@ -53,6 +66,15 @@ public class PlayerController : MonoBehaviour
         inputActions.Player.Move.performed += MoveAction;
         inputActions.Player.Move.canceled += MoveAction;
 
+        inputActions.Player.OpenInventory.performed += InventoryAction;
+        inputActions.Player.OpenMap.performed += MapAction;
+
+        inputActions.UI.OpenMap.performed += MapAction;
+
+        inputActions.UI.OpenInventory.performed += InventoryAction;
+
+        
+
     }
 
     private void UnSubscribeInputActions()
@@ -61,6 +83,13 @@ public class PlayerController : MonoBehaviour
         inputActions.Player.Move.started -= MoveAction;
         inputActions.Player.Move.performed -= MoveAction;
         inputActions.Player.Move.canceled -= MoveAction;
+
+        inputActions.Player.OpenInventory.performed -= InventoryAction;
+        inputActions.Player.OpenMap.performed -= MapAction;
+
+        inputActions.UI.OpenMap.performed -= MapAction;
+
+        inputActions.UI.OpenInventory.performed -= InventoryAction;
 
     }
 
@@ -77,10 +106,80 @@ public class PlayerController : MonoBehaviour
 
     #endregion
 
+    #region Pause/Menus
+
+    private void InventoryAction(InputAction.CallbackContext context)
+    {
+        GameManager.Instance.TogglePause();
+
+    }
+
+    private void MapAction(InputAction.CallbackContext context)
+    {
+        GameManager.Instance.TogglePause();
+
+    }
+
+    private void SwitchActionMap(string mapName = "")
+    {
+        inputActions.Player.Disable();
+        inputActions.UI.Disable();
+
+        switch (mapName)
+        {
+
+            case "Player":
+                inputActions.Player.Enable();
+
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+
+                break;
+
+            case "UI":
+
+                inputActions.UI.Enable();
+
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+                break;
+
+            default:
+
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+                break;
+
+        }
+
+
+    }
+
+    private void OnGamePausedCallback()
+    {
+        SwitchActionMap("UI");
+    }
+
+    private void OnGameResumedCallback()
+    {
+        SwitchActionMap("Player");
+    }
+
+    public void PauseMovement()
+    {
+        SwitchActionMap();
+    }
+
+    public void ResumeMovement()
+    {
+        SwitchActionMap("Player");
+    }
+
+
     #endregion
 
 
 
-
+    #endregion
 
 }
