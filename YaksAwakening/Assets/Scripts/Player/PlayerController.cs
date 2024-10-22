@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour
 {
     #region Variables
 
     #region Movement
+    [Header("Movement")]
     private PlayerInputActions inputActions;
 
     private Vector2 inputMovement;
@@ -16,7 +18,31 @@ public class PlayerController : MonoBehaviour
 
     #endregion
 
+    public bool justMovedScenes;
+
+    #region RoomChanges
+    [Header("Room Changing")]
+
+    [SerializeField] float cameraSpeed;
+    [SerializeField] float playerSpeed;
+
+    [Space(20)]
+
+    [SerializeField] float horizontalCameraMoveDistance = 16f;
+    [SerializeField] float verticalCameraMoveDistance = 12f;
+    [SerializeField] float horizontalPlayerMoveDistance;
+    [SerializeField] float verticalPlayerMoveDistance;
+
+    [SerializeField] Transform cameraTransform;
+
+
+    
+ 
+
     #endregion
+
+
+
 
     #region UnityFunctions
 
@@ -24,7 +50,7 @@ public class PlayerController : MonoBehaviour
     {
 
         inputActions = new PlayerInputActions();
-
+        justMovedScenes = false;
 
     }
 
@@ -97,7 +123,7 @@ public class PlayerController : MonoBehaviour
 
     private void MoveAction(InputAction.CallbackContext context)
     {
-        Debug.Log("Walk triggered");
+        //Debug.Log("Walk triggered");
 
         inputMovement = context.ReadValue<Vector2>();
 
@@ -182,4 +208,70 @@ public class PlayerController : MonoBehaviour
 
     #endregion
 
+
+    public IEnumerator MoveCameraAndPlayerToNewLocation(Direction direction)
+    {
+        PauseMovement();
+        justMovedScenes = true;
+
+        Vector3 cameraTarget = cameraTransform.position;
+        Vector3 playerTarget = transform.position;
+
+        switch (direction)
+        {
+            case Direction.Up:
+                 cameraTarget.y += verticalCameraMoveDistance;
+                 playerTarget.y += verticalPlayerMoveDistance;
+                break;
+
+            case Direction.Right:
+                cameraTarget.x += horizontalCameraMoveDistance;
+                playerTarget.x += horizontalPlayerMoveDistance;
+                break;
+
+            case Direction.Down:
+                cameraTarget.y -= verticalCameraMoveDistance;
+                playerTarget.y -= verticalPlayerMoveDistance;
+                break;
+
+            case Direction.Left:
+                cameraTarget.x -= horizontalCameraMoveDistance;
+                playerTarget.x -= horizontalPlayerMoveDistance;
+                break;
+        }
+
+        Debug.Log(playerTarget);
+        Debug.Log(cameraTarget);
+
+
+        while (cameraTransform.position != cameraTarget)
+        {
+
+            //Update player
+            Vector3 location = transform.position;
+
+            location = Vector3.MoveTowards(location, playerTarget, playerSpeed * Time.deltaTime);
+            transform.position = location;
+
+            //Update Camera
+
+            Vector3 cameraLocation = cameraTransform.position;
+
+            cameraLocation = Vector3.MoveTowards(cameraLocation, cameraTarget, cameraSpeed * Time.deltaTime);
+
+            cameraTransform.position = cameraLocation;
+
+            yield return null;
+        }
+
+        Debug.Log("Coroutine Finished");
+
+        GetComponent<PlayerController>().ResumeMovement();
+
+        GameManager.Instance.EnableCurrentRoom();
+
+    }
+
 }
+
+#endregion

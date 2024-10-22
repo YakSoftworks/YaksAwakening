@@ -88,7 +88,7 @@ public class PlayerMovement : MonoBehaviour
     private int DecideFacingDirection()
     {
 
-        Debug.Log(movementInput.ToString());
+        //Debug.Log(movementInput.ToString());
 
         if(movementInput.x == movementInput.y)
         {
@@ -103,13 +103,13 @@ public class PlayerMovement : MonoBehaviour
 
             if(movementInput.x > 0)
             {
-                Debug.Log("Facing North");
+                //Debug.Log("Facing North");
                 return 1;
                 
             }
             else
             {
-                Debug.Log("Facing South");
+                //Debug.Log("Facing South");
                 return 3;
             }
 
@@ -122,19 +122,22 @@ public class PlayerMovement : MonoBehaviour
             if (movementInput.y > 0)
             {
 
-                Debug.Log("Facing Right");
+                //Debug.Log("Facing Right");
                 return 0;
 
             }
 
             else
             {
-                Debug.Log("Facing Left");
+                //Debug.Log("Facing Left");
                 return 2;
             }
 
         }
 
     }
+
+
+    
 
 }

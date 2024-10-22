@@ -22,70 +22,40 @@ public class ScreenBorderZone : MonoBehaviour
     private IEnumerator MoveCameraEnumerator;
 
 
-    private void Start()
-    {
-
-        MoveCameraEnumerator = MoveCameraToNewLocation();
-
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
+            
 
             player = collision.GetComponent<PlayerController>();
-            player.PauseMovement();
 
-            StartCoroutine(MoveCameraEnumerator);
+            Debug.Log($"Player has entered a zone and status is: {player.justMovedScenes}");
+
+            //if (player.justMovedScenes)
+            //{
+            //    player.justMovedScenes = false;
+            //}
+            //else
+            //{
+
+            //    StartCoroutine(player.MoveCameraAndPlayerToNewLocation(direction));
+
+            //}
+
+
+            //Check to see if changing rooms is valid
+            if (GameManager.Instance.ChangeRoomUsingDirection(direction))
+            {
+                StartCoroutine(player.MoveCameraAndPlayerToNewLocation(direction));
+            }
+
+            
 
         }
     }
 
-    private IEnumerator MoveCameraToNewLocation()
-    {
-
-        Vector3 target = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-
-        switch (direction)
-        {
-            case Direction.Up:
-                target.y += verticalTravelDistance;
-                break;
-
-            case Direction.Right:
-                target.x += horizontalTravelDistance;
-                break;
-
-            case Direction.Down:
-                target.y -= verticalTravelDistance;
-                break;
-
-            case Direction.Left:
-                target.x -= horizontalTravelDistance;
-                break;
-        }
-
-
-        while(transform.position != target)
-        {
-
-            Vector3 location = transform.position;
-
-            location = Vector3.MoveTowards(location, target, cameraSpeed*Time.deltaTime);
-
-            transform.position = location;
-
-            yield return null;
-        }
-
-        player.ResumeMovement();
-
-        MoveCameraEnumerator = null;
-
-        MoveCameraEnumerator = MoveCameraToNewLocation();
-
-    }
+    
 
     
 }

@@ -27,7 +27,7 @@
                     "name": "OpenMap",
                     "type": "Button",
                     "id": "66cba7d5-0729-47ef-a554-13efe123f4eb",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -121,7 +121,7 @@
                     "name": "OpenInventory",
                     "type": "Button",
                     "id": "b0d00c79-a4c0-4a8c-b014-ced1c4a5b0bb",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false

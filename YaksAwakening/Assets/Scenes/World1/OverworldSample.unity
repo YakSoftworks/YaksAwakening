@@ -153,8 +153,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: 0
-  verticalTravelDistance: 11
-  horizontalTravelDistance: 15
+  verticalTravelDistance: 12
+  horizontalTravelDistance: 16
   transform: {fileID: 1258913243}
   cameraSpeed: 10
 --- !u!61 &48992480
@@ -211,7 +211,7 @@ Transform:
   m_GameObject: {fileID: 48992478}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 5.75, z: 10}
+  m_LocalPosition: {x: 0, y: 6.75, z: 10}
   m_LocalScale: {x: 15, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8006,6 +8006,17 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &283007885 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9023304783225203354, guid: 9633a79dc6f994f6fb6ee264bdf7822c, type: 3}
+  m_PrefabInstance: {fileID: 1569935906}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba3b281f1f4184fe5924dde841d0e1bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &371592893
 GameObject:
   m_ObjectHideFlags: 0
@@ -8083,8 +8094,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: 1
-  verticalTravelDistance: 11
-  horizontalTravelDistance: 15
+  verticalTravelDistance: 12
+  horizontalTravelDistance: 16
   transform: {fileID: 1258913243}
   cameraSpeed: 10
 --- !u!61 &673123962
@@ -8141,12 +8152,23 @@ Transform:
   m_GameObject: {fileID: 673123960}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.75, y: 0, z: 10}
+  m_LocalPosition: {x: 8.75, y: 0, z: 10}
   m_LocalScale: {x: 0.5, y: 11, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1258913243}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &981873992 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1362333932704787545, guid: 9633a79dc6f994f6fb6ee264bdf7822c, type: 3}
+  m_PrefabInstance: {fileID: 1569935906}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 006b5d6b83aea4395b2ccf8cf0c8a0f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1090226662
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8155,6 +8177,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2339709005912014374, guid: f133db3743a9c4752a0bb37ead0b9b26, type: 3}
+      propertyPath: playerSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2339709005912014374, guid: f133db3743a9c4752a0bb37ead0b9b26, type: 3}
+      propertyPath: cameraTransform
+      value: 
+      objectReference: {fileID: 1258913243}
+    - target: {fileID: 2339709005912014374, guid: f133db3743a9c4752a0bb37ead0b9b26, type: 3}
+      propertyPath: verticalPlayerMoveDistance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2339709005912014374, guid: f133db3743a9c4752a0bb37ead0b9b26, type: 3}
+      propertyPath: horizontalPlayerMoveDistance
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2689222900533057793, guid: f133db3743a9c4752a0bb37ead0b9b26, type: 3}
       propertyPath: m_Name
       value: Laika
@@ -8248,6 +8286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c89aa6399a994a62aa0d560414e3221, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentRoom: {fileID: 283007885}
 --- !u!1 &1258913240
 GameObject:
   m_ObjectHideFlags: 0
@@ -8389,6 +8428,83 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!1001 &1569935906
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 540896559775633013, guid: 9633a79dc6f994f6fb6ee264bdf7822c, type: 3}
+      propertyPath: disableOnStart
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1667677489232387641, guid: 9633a79dc6f994f6fb6ee264bdf7822c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -16.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1667677489232387641, guid: 9633a79dc6f994f6fb6ee264bdf7822c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1667677489232387641, guid: 9633a79dc6f994f6fb6ee264bdf7822c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1667677489232387641, guid: 9633a79dc6f994f6fb6ee264bdf7822c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1667677489232387641, guid: 9633a79dc6f994f6fb6ee264bdf7822c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1667677489232387641, guid: 9633a79dc6f994f6fb6ee264bdf7822c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1667677489232387641, guid: 9633a79dc6f994f6fb6ee264bdf7822c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1667677489232387641, guid: 9633a79dc6f994f6fb6ee264bdf7822c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1667677489232387641, guid: 9633a79dc6f994f6fb6ee264bdf7822c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1667677489232387641, guid: 9633a79dc6f994f6fb6ee264bdf7822c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7868254651250231902, guid: 9633a79dc6f994f6fb6ee264bdf7822c, type: 3}
+      propertyPath: m_Name
+      value: RoomTemplate
+      objectReference: {fileID: 0}
+    - target: {fileID: 8234387764889681872, guid: 9633a79dc6f994f6fb6ee264bdf7822c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8234387764889681872, guid: 9633a79dc6f994f6fb6ee264bdf7822c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9023304783225203354, guid: 9633a79dc6f994f6fb6ee264bdf7822c, type: 3}
+      propertyPath: respawnableItemsInScene.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9023304783225203354, guid: 9633a79dc6f994f6fb6ee264bdf7822c, type: 3}
+      propertyPath: respawnableItemsInScene.Array.data[1]
+      value: 
+      objectReference: {fileID: 981873992}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9633a79dc6f994f6fb6ee264bdf7822c, type: 3}
 --- !u!1 &1744080185
 GameObject:
   m_ObjectHideFlags: 0
@@ -8416,7 +8532,7 @@ Transform:
   m_GameObject: {fileID: 1744080185}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -5.75, z: 10}
+  m_LocalPosition: {x: 0, y: -6.75, z: 10}
   m_LocalScale: {x: 15, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8435,8 +8551,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: 2
-  verticalTravelDistance: 11
-  horizontalTravelDistance: 15
+  verticalTravelDistance: 12
+  horizontalTravelDistance: 16
   transform: {fileID: 1258913243}
   cameraSpeed: 10
 --- !u!61 &1744080188
@@ -8511,7 +8627,7 @@ Transform:
   m_GameObject: {fileID: 1863506186}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.75, y: 0, z: 10}
+  m_LocalPosition: {x: -8.75, y: 0, z: 10}
   m_LocalScale: {x: 0.5, y: 11, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8530,8 +8646,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: 3
-  verticalTravelDistance: 11
-  horizontalTravelDistance: 15
+  verticalTravelDistance: 12
+  horizontalTravelDistance: 16
   transform: {fileID: 1258913243}
   cameraSpeed: 10
 --- !u!61 &1863506189
@@ -8588,3 +8704,4 @@ SceneRoots:
   - {fileID: 1090226662}
   - {fileID: 1092486384}
   - {fileID: 63052986}
+  - {fileID: 1569935906}
