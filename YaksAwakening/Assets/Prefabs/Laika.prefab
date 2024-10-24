@@ -14,9 +14,10 @@ GameObject:
   - component: {fileID: 5471839173541089027}
   - component: {fileID: 2339709005912014374}
   - component: {fileID: 8931778802696537813}
+  - component: {fileID: 6215355198331563073}
   m_Layer: 0
   m_Name: Laika
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -114,7 +115,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &5471839173541089027
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -173,6 +174,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMovement: {fileID: 8931778802696537813}
+  justMovedScenes: 0
+  cameraSpeed: 10
+  horizontalCameraMoveDistance: 16
+  verticalCameraMoveDistance: 12
+  horizontalPlayerMoveDistance: 0
+  verticalPlayerMoveDistance: 0
+  cameraTransform: {fileID: 0}
 --- !u!114 &8931778802696537813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,4 +194,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 4050096402830163807}
-  moveSpeed: 1
+  animator: {fileID: 6215355198331563073}
+  moveSpeed: 4
+--- !u!95 &6215355198331563073
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2689222900533057793}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bfe77425dd35b4c6f9baa24607d458f6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
