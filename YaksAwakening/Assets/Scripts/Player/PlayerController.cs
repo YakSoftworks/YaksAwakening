@@ -36,13 +36,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Transform cameraTransform;
 
 
-    
- 
+
+
 
     #endregion
 
 
-
+    #endregion
 
     #region UnityFunctions
 
@@ -273,5 +273,3 @@ public class PlayerController : MonoBehaviour
     }
 
 }
-
-#endregion
