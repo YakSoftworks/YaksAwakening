@@ -8,13 +8,13 @@ public class ResetableObject : MonoBehaviour
     [Header("Object Specification")]
     [SerializeField] GameObject spawnObject; //Variable for the prefab of the object to create
 
-    [SerializeField] bool disableOnStart; //Boolean on whether or not to disable on start
+    [SerializeField] bool disableOnStart = true; //Boolean on whether or not to disable on start
 
 
     //[Header("Gizmos")]
     //[SerializeField] Sprite gizmoSprite;
 
-    private GameObject spawnedObject; //Reference to the object created
+    private BaseWorldObject spawnedObject; //Reference to the object created
 
     #region Unity Functions
 
@@ -22,7 +22,7 @@ public class ResetableObject : MonoBehaviour
     {
 
         //Create a copy of the object
-        CreateObject();
+        //CreateObject();
 
     }
 
@@ -40,8 +40,11 @@ public class ResetableObject : MonoBehaviour
         }
         //Create new instance of the object
         Debug.Log("Creating New Object");
-        spawnedObject = Instantiate(spawnObject, transform);
-
+        spawnedObject = Instantiate(spawnObject, transform).GetComponent<BaseWorldObject>();
+        if(spawnedObject == null)
+        {
+            Debug.LogWarning("NO REFERENCE TO OBJECT");
+        }
 
         //If object specified to wait until activated, disable it
         if (disableOnStart)
@@ -67,7 +70,7 @@ public class ResetableObject : MonoBehaviour
     public virtual bool EnableObject()
     {
         //Check to see if we are already enabled
-        if (spawnedObject.activeSelf)
+        if (spawnedObject.gameObject.activeSelf)
         {
             //If we are, Log it and return false
             Debug.Log("Object already Enabled");
@@ -76,7 +79,7 @@ public class ResetableObject : MonoBehaviour
         else
         {
             //Otherwise, enable and return true
-            spawnedObject.SetActive(true);
+            spawnedObject.gameObject.SetActive(true);
             return true;
         }
     }
@@ -84,8 +87,10 @@ public class ResetableObject : MonoBehaviour
     //Returns true if properly disables
     public virtual bool DisableObject()
     {
+        if (spawnedObject == null) { return false; }
+
         //Check to see if already disabled
-        if (!spawnedObject.activeSelf)
+        if (!spawnedObject.gameObject.activeSelf)
         {
             //If we are, Log it and return false
             Debug.Log("Object already Disabled");
@@ -94,11 +99,18 @@ public class ResetableObject : MonoBehaviour
         else
         {
             //Otherwise, disable and return true
-            spawnedObject.SetActive(false);
+            spawnedObject.gameObject.SetActive(false);
             return true;
         }
     }
     #endregion
+
+    
+    public void SetObjectUpdateStatus(bool doUpdate)
+    {
+        spawnedObject.SetPauseObject(doUpdate);
+    }
+
 
     #endregion
 

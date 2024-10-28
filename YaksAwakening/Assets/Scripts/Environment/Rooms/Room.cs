@@ -21,7 +21,19 @@ public class Room : MonoBehaviour
     [SerializeField] private Room leftRoom;
     [SerializeField] private Room rightRoom;
 
-    private bool isLoaded;
+    //[Header("Room Details")]
+
+    public Bounds roomBounds { get; private set; }
+
+    bool isLoaded;
+
+    //The distances from the center to the end in x and y
+    public static Vector3 roomSize
+    {
+        get { return new Vector3(8, 6); }
+    }
+
+
 
 
     #region Unity Functions
@@ -31,6 +43,8 @@ public class Room : MonoBehaviour
         ResetRoom();
 
         isLoaded = false;
+
+        roomBounds = new Bounds(transform.position, roomSize);
 
     }
 
@@ -123,22 +137,16 @@ public class Room : MonoBehaviour
 
     #endregion
 
-    //TODO: Do whatever we need to do to unfreeze the objects in the room without reseting them
     public void ActivateRoom()
     {
-        //If we are already loaded, do nothing
-        if (isLoaded) { return; }
-
-        //For now:
-        EnableRoom();
+        UnPauseRoomObjects();
     }
 
-    //TODO: Do whatever we need to do to freeze the objects in the room without reseting them
     public void DeactivateRoom()
     {
-
-        //For now:
-        DisableRoom();
+        Debug.Log("Deactivate 2");
+        PauseRoomObjects();
+        Debug.Log("Deactivate 3");
     }
 
     public Room GetRoomFromDirection(Direction direction)
@@ -158,6 +166,22 @@ public class Room : MonoBehaviour
                 return null;
         }
 
+    }
+
+    private void PauseRoomObjects()
+    {
+        for (int i = 0; i < respawnableItemsInScene.Count; i++)
+        {
+            respawnableItemsInScene[i].SetObjectUpdateStatus(false);
+        }
+    }
+
+    private void UnPauseRoomObjects()
+    {
+        for (int i = 0; i < respawnableItemsInScene.Count; i++)
+        {
+            respawnableItemsInScene[i].SetObjectUpdateStatus(true);
+        }
     }
 
 

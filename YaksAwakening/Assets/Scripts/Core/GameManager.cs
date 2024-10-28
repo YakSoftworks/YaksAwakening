@@ -20,7 +20,15 @@ public class GameManager : MonoBehaviour
 
     #region Rooms
 
-    [SerializeField] private Room currentRoom;
+    [SerializeField] public Room currentRoom
+    {
+        get;  private set;
+    }
+
+    public void SetCurrentRoom(Room room)
+    {
+        currentRoom = room;
+    }
 
     #endregion
 
@@ -108,6 +116,7 @@ public class GameManager : MonoBehaviour
         if (nextRoom == null) { return false; }
 
         //Pause the currentRoom
+        Debug.Log("Deactivate 1");
         currentRoom.DeactivateRoom();
 
         //Disable our neighbors except for the one we are going into
@@ -127,11 +136,27 @@ public class GameManager : MonoBehaviour
 
     public void EnableCurrentRoom()
     {
+
+        
         if (currentRoom != null)
         {
+            Debug.Log("Enabling Room");
             currentRoom.ActivateRoom();
         }
+        else
+        {
+            Debug.LogWarning("CURRENT ROOM IS NULL ");
+        }
          
+    }
+
+    public void DisableCurrentRoom()
+    {
+        if(currentRoom != null)
+        {
+            Debug.Log("Disabling Room");
+            currentRoom.DeactivateRoom();
+        }
     }
 
     #endregion

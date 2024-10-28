@@ -4,26 +4,15 @@ using UnityEngine;
 
 public class ScreenBorderZone : MonoBehaviour
 {
-
-    //[SerializeField] private int direction;
-
+    //Side of the screen this trigger is on
     [SerializeField] private Direction direction;
-
-    [SerializeField] private float verticalTravelDistance;
-
-    [SerializeField] private float horizontalTravelDistance;
-
-    [SerializeField] private Transform transform;
-
-    [SerializeField] private float cameraSpeed;
 
     private PlayerController player;
 
-    private IEnumerator MoveCameraEnumerator;
-
-
+    //When something enters the trigger
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        //If it is the player
         if (collision.CompareTag("Player"))
         {
             
@@ -32,21 +21,11 @@ public class ScreenBorderZone : MonoBehaviour
 
             Debug.Log($"Player has entered a zone and status is: {player.justMovedScenes}");
 
-            //if (player.justMovedScenes)
-            //{
-            //    player.justMovedScenes = false;
-            //}
-            //else
-            //{
-
-            //    StartCoroutine(player.MoveCameraAndPlayerToNewLocation(direction));
-
-            //}
-
 
             //Check to see if changing rooms is valid
             if (GameManager.Instance.ChangeRoomUsingDirection(direction))
             {
+                //Tell they player they may change rooms
                 StartCoroutine(player.MoveCameraAndPlayerToNewLocation(direction));
             }
 
@@ -60,6 +39,7 @@ public class ScreenBorderZone : MonoBehaviour
     
 }
 
+//Enum for determining direction of room movement
 public enum Direction
 {
     Up,

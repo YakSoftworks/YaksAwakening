@@ -153,10 +153,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: 0
-  verticalTravelDistance: 12
-  horizontalTravelDistance: 16
-  transform: {fileID: 1258913243}
-  cameraSpeed: 10
 --- !u!61 &48992480
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -281,7 +277,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1667677489232387641, guid: 9633a79dc6f994f6fb6ee264bdf7822c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1667677489232387641, guid: 9633a79dc6f994f6fb6ee264bdf7822c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -390,10 +386,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: 1
-  verticalTravelDistance: 12
-  horizontalTravelDistance: 16
-  transform: {fileID: 1258913243}
-  cameraSpeed: 10
 --- !u!61 &673123962
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -479,7 +471,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1667677489232387641, guid: 9633a79dc6f994f6fb6ee264bdf7822c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1667677489232387641, guid: 9633a79dc6f994f6fb6ee264bdf7822c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -648,6 +640,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1092486384}
   - component: {fileID: 1092486385}
+  - component: {fileID: 1092486386}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -682,7 +675,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c89aa6399a994a62aa0d560414e3221, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentRoom: {fileID: 1569935907}
+--- !u!114 &1092486386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1092486383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dc0ec1cc224e4fb48bbb353c4316889, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingRoom: {fileID: 1569935907}
 --- !u!1001 &1226964361
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -693,7 +698,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1930076578084992308, guid: 42e8026f8593a468b87224ed2e72d189, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -16.5
+      value: -16
       objectReference: {fileID: 0}
     - target: {fileID: 1930076578084992308, guid: 42e8026f8593a468b87224ed2e72d189, type: 3}
       propertyPath: m_LocalPosition.y
@@ -733,7 +738,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2821801452642487700, guid: 42e8026f8593a468b87224ed2e72d189, type: 3}
       propertyPath: disableOnStart
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4343276315532255319, guid: 42e8026f8593a468b87224ed2e72d189, type: 3}
       propertyPath: downRoom
@@ -930,7 +935,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1667677489232387641, guid: 9633a79dc6f994f6fb6ee264bdf7822c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1667677489232387641, guid: 9633a79dc6f994f6fb6ee264bdf7822c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1066,10 +1071,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: 2
-  verticalTravelDistance: 12
-  horizontalTravelDistance: 16
-  transform: {fileID: 1258913243}
-  cameraSpeed: 10
 --- !u!61 &1744080188
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1129,7 +1130,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1667677489232387641, guid: 9633a79dc6f994f6fb6ee264bdf7822c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -16.5
+      value: -16
       objectReference: {fileID: 0}
     - target: {fileID: 1667677489232387641, guid: 9633a79dc6f994f6fb6ee264bdf7822c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1257,10 +1258,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: 3
-  verticalTravelDistance: 12
-  horizontalTravelDistance: 16
-  transform: {fileID: 1258913243}
-  cameraSpeed: 10
 --- !u!61 &1863506189
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1320,7 +1317,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1667677489232387641, guid: 9633a79dc6f994f6fb6ee264bdf7822c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 15.5
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 1667677489232387641, guid: 9633a79dc6f994f6fb6ee264bdf7822c, type: 3}
       propertyPath: m_LocalPosition.y
