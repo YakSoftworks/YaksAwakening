@@ -1,5 +1,5 @@
-#Yaks Awakening
-##Current State: Slow Rolling Development
+# Yaks Awakening
+## Current State: Slow Rolling Development
 
 ## Player:
 The player is set up with movement and pausing. The general player setup is in a prefab.
