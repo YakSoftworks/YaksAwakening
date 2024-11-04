@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 664abc7d8aceb4c91af5260e8e73153c, type: 3}
+  m_Name: P_Mark
+  m_EditorClassIdentifier: 
+  name: Mark
+  availableActions:
+  - {fileID: 11400000, guid: 8829df066837142f7b541ff309e970d9, type: 2}
+  - {fileID: 11400000, guid: 05f240e995a0f48cb9b326d3331538f3, type: 2}
+  DebugAction: {fileID: 11400000, guid: 8829df066837142f7b541ff309e970d9, type: 2}
+  target: {fileID: 11400000, guid: e8a0ac7f4d2804a149d5f5edf43694cb, type: 2}
+  maxHealth: 100
+  currentHealth: 100
+  owningController: {fileID: 0}
+  strength: 16
+  weight: 16
+  AttackPower: 40
+  AttackMultiplier: 1
+  baseSpeed: 10
+  itemSpeed: 3
+  timeSinceLastAction: 1
+  turnSpeedMultiplier: 1
+  speedEffectMultiplier: 1
+  speedEffectBias: 0
