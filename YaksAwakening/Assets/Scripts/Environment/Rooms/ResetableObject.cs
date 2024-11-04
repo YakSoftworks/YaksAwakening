@@ -46,6 +46,8 @@ public class ResetableObject : MonoBehaviour
             Debug.LogWarning("NO REFERENCE TO OBJECT");
         }
 
+        spawnedObject.SetSpawner(this);
+
         //If object specified to wait until activated, disable it
         if (disableOnStart)
         {

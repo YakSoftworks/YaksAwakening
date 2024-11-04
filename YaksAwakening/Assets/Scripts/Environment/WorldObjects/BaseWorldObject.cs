@@ -7,11 +7,19 @@ public class BaseWorldObject : MonoBehaviour
 {
     //Boolean for whether we can update on this tick
     private bool bCanUpdate = false;
+
+    private ResetableObject spawner;
+
     //Set function
     public void SetPauseObject(bool doUpdate)
     {
         bCanUpdate = doUpdate;
         Debug.Log($"{gameObject.name} : Current State: {bCanUpdate}");
+    }
+
+    public void SetSpawner(ResetableObject resetSpawner)
+    {
+        spawner = resetSpawner;
     }
 
 
@@ -24,17 +32,16 @@ public class BaseWorldObject : MonoBehaviour
     }
 
 
-    protected virtual bool CheckIsWithinRoomBounds()
+    protected bool CheckIsWithinRoomBounds(Vector2 position)
     {
         Bounds roomBounds = GameManager.Instance.currentRoom.roomBounds;
 
-        if (roomBounds.Contains(transform.position))
+        if (roomBounds.Contains(position))
         {
             return true;
         }
 
         return false;
-
 
     }
 

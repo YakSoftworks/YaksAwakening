@@ -23,7 +23,7 @@ public class Room : MonoBehaviour
 
     //[Header("Room Details")]
 
-    public Bounds roomBounds { get; private set; }
+    public Bounds roomBounds;
 
     bool isLoaded;
 
