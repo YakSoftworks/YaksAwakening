@@ -4,9 +4,14 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.Events;
 
+//UI Controller for the action menu
+//Made only for Attack and Wait as actions
+
 public class BattleActionMenu : MonoBehaviour
 {
     [SerializeField] private UIDocument ui;
+
+    #region VisualElements
 
     private VisualElement rootElement;
 
@@ -19,6 +24,19 @@ public class BattleActionMenu : MonoBehaviour
     private VisualElement targetingContainer;
 
     private Label currentTargetLabel;
+
+    #region Character Information
+
+    private VisualElement playerInformationContainer;
+
+    private Label playerNameLabel;
+
+    private Label playerHealthLabel;
+
+    #endregion
+
+
+    #endregion
 
     private TempPlayer attachedPlayer;
 
@@ -35,6 +53,7 @@ public class BattleActionMenu : MonoBehaviour
 
         rootElement = ui.rootVisualElement;
 
+        //Get a reference to each of our buttons
 
         attackButton = rootElement.Q<Button>("AttackButton");
         waitButton = rootElement.Q<Button>("WaitButton");
@@ -45,6 +64,11 @@ public class BattleActionMenu : MonoBehaviour
         currentTargetLabel = rootElement.Q<Label>("TargetName");
 
 
+        playerInformationContainer = rootElement.Q<VisualElement>("playerInformationContainer");
+        playerNameLabel = rootElement.Q<Label>("CurrentPlayerInformation");
+        playerHealthLabel = rootElement.Q<Label>("CurrentPlayerHealth");
+
+
 
         //rootElement.style.visibility = Visibility.Hidden;
 
@@ -52,6 +76,7 @@ public class BattleActionMenu : MonoBehaviour
 
         waitButton.clicked += WaitButtonPressed;
 
+        //Hide our menus
         actionContainer.style.visibility = Visibility.Hidden;
 
         targetingContainer.style.visibility = Visibility.Hidden;
@@ -66,36 +91,56 @@ public class BattleActionMenu : MonoBehaviour
         waitButton.clicked -= WaitButtonPressed;
     }
 
+    
     public void PromptPlayerAction(TempPlayer player)
     {
+        //Reset our currentMode
         currentMode = TurnMode.SelectingAction;
-
-        //Reset internal variables
         Debug.Log("PromptMenu showing");
 
+        //Show our actionMenu
         actionContainer.style.visibility = Visibility.Visible;
+        //Set player reference
         attachedPlayer = player;
+
+        
+        playerNameLabel.text = "Name: " + attachedPlayer.characterName;
+        playerHealthLabel.text =
+            $"Health: {attachedPlayer.currentHealth}/{attachedPlayer.maxHealth}";
+        playerInformationContainer.style.visibility = Visibility.Visible;
+
     }
 
     private void AttackButtonPressed()
     {
         Debug.Log("Attack Button Clicked");
-
+        //If we were targeting a player, we will use the action
         if (IsTargeting)
         {
+            //Hide the menus
             targetingContainer.style.visibility = Visibility.Hidden;
             actionContainer.style.visibility = Visibility.Hidden;
+            playerInformationContainer.style.visibility = Visibility.Hidden;
+            //tell the player to take their turn
             attachedPlayer.TakeTurn(attachedPlayer.attackAction, currentTarget);
+            
             return;
         }
+        //Otherwise,
 
+        //Enter the targeting mode
         currentMode = TurnMode.TargetingPlayer;
+        //Set our selected action as our chosen action
         selectedAction = attachedPlayer.attackAction;
 
+        //Select our inital currentTarget
         currentTarget = attachedPlayer.GetInitialTarget();
+
+        //Update the text in the UI
         currentTargetLabel.text = currentTarget.characterName;
         Debug.Log("New Target: " + currentTarget.characterName);
 
+        //Show our targeting UI
         targetingContainer.style.visibility = Visibility.Visible;
 
 
@@ -107,6 +152,7 @@ public class BattleActionMenu : MonoBehaviour
         //Tell the player to take a wait action
         actionContainer.style.visibility = Visibility.Hidden;
         targetingContainer.style.visibility = Visibility.Hidden;
+        playerInformationContainer.style.visibility = Visibility.Hidden;
         attachedPlayer.TakeTurn(attachedPlayer.waitAction, null);
         
     }
@@ -116,18 +162,33 @@ public class BattleActionMenu : MonoBehaviour
        //Check to see if we are targeting
        if(IsTargeting)
         {
+            //Update our currentTarget
             currentTarget = newTarget;
+            //Update the UI Label with their name
             currentTargetLabel.text = newTarget.characterName;
             Debug.Log("New Target: "+ newTarget.characterName);
         }
     }
 
+    //Way of managing different states of the actionMenu
     private enum TurnMode
     {
         SelectingAction,
         TargetingPlayer
     }
 
+    //Called when we need to end the battle
+    public void EndBattle()
+    {
+        //Hide 
+        actionContainer.style.visibility = Visibility.Hidden;
+        targetingContainer.style.visibility = Visibility.Hidden;
+
+        //Maybe Do More
+        Debug.Log("Congratulations Winning Team...");
+    }
+
+    
 
 
 

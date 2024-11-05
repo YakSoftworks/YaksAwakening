@@ -12,16 +12,20 @@ public class TurnManager
     private List<TempPlayer> players;
     //Create a copy for each battle
 
-    public float incrementTimeForTurns { get { return 1f / (players.Count) / 2f; } }
+    public float incrementTimeForTurns { get { return 1f / (players.Count) / 2f; } } //Equation to increment based on number of remaining players
 
-    public UnityEvent nextTurnEvent = new UnityEvent();
+    public UnityEvent nextTurnEvent = new UnityEvent(); //Event with TellNextPlayerToAct attached -> Invoked by players on the end of their turn
 
-    public TempPlayer currentPlayer;
+
+    public TempPlayer currentPlayer; //Reference to the player currently taking their turn
 
     //Initalize the turn system with the given teams
     public void InitializeTurnSystem(BattleController bc, List<TempPlayer> tempPlayers)
     {
+        //Set our owningController reference
         owningController = bc;
+
+        //Set our list of all players, ignoring whichever team they are on
         players = tempPlayers;
 
 
@@ -37,8 +41,10 @@ public class TurnManager
         //Step 1: Check if battle is over
         if (!owningController.battleInProgress)
         {
+            //If it is, then tell the controller to end the battle
             Debug.Log("battle over");
             owningController.EndBattle();
+            return;
             
         }
 
@@ -71,6 +77,7 @@ public class TurnManager
     {
         //Debug.Log("Current Increment Time = " + incrementTimeForTurns);
 
+        //Increment the time multiplier in each of our players
         foreach(TempPlayer player in players)
         {
             //Increase the value for each player 
@@ -80,7 +87,14 @@ public class TurnManager
 
     public void PlayerDied(TempPlayer player)
     {
+        //When a player has died, lets remove them from our list of available players
         players.Remove(player);
+    }
+
+    public bool IsPlayerAlive(TempPlayer player)
+    {
+        //To check if a player is alive, see if tehy are in our players list
+        return players.Contains(player);
     }
 }
 

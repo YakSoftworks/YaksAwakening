@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+//Temporary Class to 
+
 public class BattlePlayerController : MonoBehaviour
 {
 
@@ -44,7 +46,7 @@ public class BattlePlayerController : MonoBehaviour
     }
 
 
-    //TODO: Llamda
+    //When we hit left/right bracket, change our current target forward or backward
     private void OnSwitchRightPerformed(InputAction.CallbackContext context)
     {
         battleSystem.turnManager.currentPlayer.IncrementCurrentTarget(1);
