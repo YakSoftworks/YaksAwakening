@@ -263,6 +263,68 @@ MonoBehaviour:
   OnGamePaused:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &304590163
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 304590165}
+  - component: {fileID: 304590164}
+  - component: {fileID: 304590166}
+  m_Layer: 5
+  m_Name: ActionMenu
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &304590164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 304590163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PanelSettings: {fileID: 11400000, guid: ee7e03cf7c45540c0aae11c43310e76f, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: c6ba7f237070049ea873d364d7e156bc, type: 3}
+  m_SortingOrder: 0
+--- !u!4 &304590165
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 304590163}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &304590166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 304590163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6ec4727e5b754b50b93927c616494ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ui: {fileID: 304590164}
 --- !u!1001 &360924871
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -384,12 +446,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16863e623f6264942a4046252857d84e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turnManager: {fileID: 11400000, guid: 09b008475b79a4b8e9f75b91fbd529e7, type: 2}
+  turnManager:
+    nextTurnEvent:
+      m_PersistentCalls:
+        m_Calls: []
   teamA:
   - {fileID: 11400000, guid: e8a0ac7f4d2804a149d5f5edf43694cb, type: 2}
   teamB:
   - {fileID: 11400000, guid: 21ba0afee170046638391fbfc573335c, type: 2}
   - {fileID: 11400000, guid: cbf6b78075c2c430790a2979d2e927ef, type: 2}
+  actionMenu: {fileID: 304590166}
 --- !u!4 &506119711
 Transform:
   m_ObjectHideFlags: 0
@@ -1471,3 +1537,4 @@ SceneRoots:
   - {fileID: 1918358169}
   - {fileID: 1226964361}
   - {fileID: 506119711}
+  - {fileID: 304590165}

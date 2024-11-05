@@ -7,10 +7,10 @@ public class WaitAction : BattleAction
 {
     public override void Act(TempPlayer actor, TempPlayer target)
     {
-
+        if (target != null) { Debug.Log($"{actor.name} used {name} against {target.name}"); }
         GiveActorSpeedMultiplier(actor);
 
-        Debug.Log($"{actor.name} used {name} against {target.name}");
+        
 
     }
 

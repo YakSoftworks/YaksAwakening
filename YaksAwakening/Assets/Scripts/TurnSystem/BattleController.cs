@@ -12,6 +12,8 @@ public class BattleController : MonoBehaviour
 
     [SerializeField] private List<TempPlayer> teamB = new List<TempPlayer>();
 
+    public BattleActionMenu actionMenu;
+
     private int teamALivesRemaining = 0;
     private int teamBLivesRemaining = 0;
 
@@ -35,20 +37,7 @@ public class BattleController : MonoBehaviour
         turnManager.InitializeTurnSystem(this, players);
 
         //Start the battle
-        turnManager.StartBattle();
-
-
-        foreach (TempPlayer player in teamA)
-        {
-            player.ResetMultipliers();
-        }
-        foreach (TempPlayer player in teamB)
-        {
-            player.ResetMultipliers();
-        }
-
-
-
+        turnManager.nextTurnEvent.Invoke();
 
     }
 
@@ -85,6 +74,25 @@ public class BattleController : MonoBehaviour
         }
 
 
+    }
+
+    public void EndBattle()
+    {
+        //Do something
+        Debug.Log("The battle has ended");
+    }
+
+    public List<TempPlayer> GetEnemies(TempPlayer player)
+    {
+        if (teamA.Contains(player))
+        {
+            return teamB;
+        }
+
+        else
+        {
+            return teamA;
+        }
     }
 
 

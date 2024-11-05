@@ -1,0 +1,9 @@
+.ActionMenuButton {
+    flex-grow: 1;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    background-color: rgb(89, 89, 89);
+    color: rgb(255, 255, 255);
+}

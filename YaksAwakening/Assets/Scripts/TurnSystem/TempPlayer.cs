@@ -9,12 +9,12 @@ public class TempPlayer : ScriptableObject, System.IComparable<TempPlayer>
     [SerializeField] private string name;
 
 
-    [SerializeField] private List<BattleAction> availableActions = new List<BattleAction>();
+    public BattleAction attackAction;
+
+    public BattleAction waitAction;
 
     //DEBUG:::
     [SerializeField] private BattleAction DebugAction;
-
-    [SerializeField] private TempPlayer target;
 
     [SerializeField] private float maxHealth;
 
@@ -58,6 +58,8 @@ public class TempPlayer : ScriptableObject, System.IComparable<TempPlayer>
 
     [SerializeField] private float speedEffectBias = 0f;
 
+    private TurnManager turnManager;
+
     public void IncrementTimeSinceLastAction(float increment)
     {
         timeSinceLastAction += increment;
@@ -69,29 +71,40 @@ public class TempPlayer : ScriptableObject, System.IComparable<TempPlayer>
         //Speed Equation
         float speed = ((baseSpeed + itemSpeed) * (strength / weight) * speedEffectMultiplier * timeSinceLastAction * turnSpeedMultiplier) + speedEffectBias;
 
-        Debug.Log($"{name} has speed: {speed}");
+        //Debug.Log($"{name} has speed: {speed}");
         return speed;
 
 
 
     }
 
-    public void TakeTurn(TurnManager manager)
+    public void StartTurn(TurnManager manager)
     {
-        //Take the action
-        //Debug.Log($"{name} is taking their turn with speed: {speed * speedMultiplier * timeSinceLastAction * turnSpeedMultiplier}");
-        //Debug.Log($"Base Speed: {speed}\tSpeedMultiplier: {speedMultiplier}\ttimeSinceLastAction: {timeSinceLastAction}\tTurnSpeedMultiplier: {turnSpeedMultiplier}");
 
+        Debug.Log("Starting Player Turn");
+        owningController.actionMenu.PromptPlayerAction(this);
 
-        availableActions[Random.Range(0, availableActions.Count)].Act(this, target);
+        //This function is to bring up the prompt for the player to take their turn
 
+        //Set the reference to the turn manager
+        turnManager = manager;
+    }
 
-        //DebugAction.Act(this, target);
-        //Set my time to next turn to minimum
+    //When the user has selected their action and target, they can take their action and prompt the manager to do the next turn
+    public void TakeTurn(BattleAction action, TempPlayer target)
+    {
+        //Do the action
+        action.Act(this, target);
+        
+
+        //Reset our timer
         timeSinceLastAction = 0;
 
-        //TELL OWNER TO TAKE IN INPUT
-        //WAIT UNTIL INPUT GIVEN
+        //Tell the manger to do the next turn
+        Debug.Log("Ending Turn");
+        
+        turnManager.nextTurnEvent.Invoke();
+
     }
 
     public void SetTurnSpeedMultiplier(float multiplier)
@@ -112,7 +125,7 @@ public class TempPlayer : ScriptableObject, System.IComparable<TempPlayer>
         }
         else
         {
-            //Debug.Log($"{name} has {currentHealth} remaining");
+            Debug.Log($"{name} has {currentHealth} remaining");
         }
 
 
@@ -131,5 +144,13 @@ public class TempPlayer : ScriptableObject, System.IComparable<TempPlayer>
     public int CompareTo(TempPlayer other)
     {
         return 1-(GetCurrentBattleSpeed().CompareTo(other.GetCurrentBattleSpeed()));
+    }
+
+    public TempPlayer GetRandomTarget()
+    {
+        List<TempPlayer> enemies = owningController.GetEnemies(this);
+
+        return enemies[Random.Range(0, enemies.Count)];
+
     }
 }
