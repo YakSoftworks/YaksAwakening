@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class BattleController : MonoBehaviour
 {
-    [SerializeField] private TurnManager turnManager;
+    public TurnManager turnManager;
 
     [SerializeField] private List<TempPlayer> teamA = new List<TempPlayer>();
 
@@ -95,6 +95,15 @@ public class BattleController : MonoBehaviour
         }
     }
 
+    public void UpdateActionUI(TempPlayer newTarget)
+    {
+        actionMenu.UpdateCurrentTarget(newTarget);
+    }
+
+    public bool GetIsTargeting()
+    {
+        return actionMenu.IsTargeting;
+    }
 
 
 

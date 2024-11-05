@@ -16,11 +16,19 @@ public class BattleActionMenu : MonoBehaviour
 
     private Button waitButton;
 
-    private DropdownMenu enemyMenu;
+    private VisualElement targetingContainer;
+
+    private Label currentTargetLabel;
 
     private TempPlayer attachedPlayer;
 
+    private TempPlayer currentTarget;
+
     private BattleAction selectedAction;
+
+    private TurnMode currentMode;
+
+    public bool IsTargeting { get { return currentMode == TurnMode.TargetingPlayer; } }
 
     private void Start()
     {
@@ -32,6 +40,9 @@ public class BattleActionMenu : MonoBehaviour
         waitButton = rootElement.Q<Button>("WaitButton");
 
         actionContainer = rootElement.Q<VisualElement>("ActionContainer");
+        targetingContainer = rootElement.Q<VisualElement>("TargetingContainer");
+
+        currentTargetLabel = rootElement.Q<Label>("TargetName");
 
 
 
@@ -42,6 +53,8 @@ public class BattleActionMenu : MonoBehaviour
         waitButton.clicked += WaitButtonPressed;
 
         actionContainer.style.visibility = Visibility.Hidden;
+
+        targetingContainer.style.visibility = Visibility.Hidden;
         
 
     }
@@ -55,6 +68,8 @@ public class BattleActionMenu : MonoBehaviour
 
     public void PromptPlayerAction(TempPlayer player)
     {
+        currentMode = TurnMode.SelectingAction;
+
         //Reset internal variables
         Debug.Log("PromptMenu showing");
 
@@ -65,11 +80,25 @@ public class BattleActionMenu : MonoBehaviour
     private void AttackButtonPressed()
     {
         Debug.Log("Attack Button Clicked");
-        selectedAction = attachedPlayer.attackAction;
-        actionContainer.style.visibility = Visibility.Hidden;
-        attachedPlayer.TakeTurn(attachedPlayer.attackAction, attachedPlayer.GetRandomTarget());
 
-        
+        if (IsTargeting)
+        {
+            targetingContainer.style.visibility = Visibility.Hidden;
+            actionContainer.style.visibility = Visibility.Hidden;
+            attachedPlayer.TakeTurn(attachedPlayer.attackAction, currentTarget);
+            return;
+        }
+
+        currentMode = TurnMode.TargetingPlayer;
+        selectedAction = attachedPlayer.attackAction;
+
+        currentTarget = attachedPlayer.GetInitialTarget();
+        currentTargetLabel.text = currentTarget.characterName;
+        Debug.Log("New Target: " + currentTarget.characterName);
+
+        targetingContainer.style.visibility = Visibility.Visible;
+
+
     }
 
     private void WaitButtonPressed()
@@ -77,8 +106,26 @@ public class BattleActionMenu : MonoBehaviour
         Debug.Log("Wait Button Clicked");
         //Tell the player to take a wait action
         actionContainer.style.visibility = Visibility.Hidden;
+        targetingContainer.style.visibility = Visibility.Hidden;
         attachedPlayer.TakeTurn(attachedPlayer.waitAction, null);
         
+    }
+
+    public void UpdateCurrentTarget(TempPlayer newTarget)
+    {
+       //Check to see if we are targeting
+       if(IsTargeting)
+        {
+            currentTarget = newTarget;
+            currentTargetLabel.text = newTarget.characterName;
+            Debug.Log("New Target: "+ newTarget.characterName);
+        }
+    }
+
+    private enum TurnMode
+    {
+        SelectingAction,
+        TargetingPlayer
     }
 
 

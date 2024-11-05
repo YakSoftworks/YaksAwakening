@@ -16,6 +16,8 @@ public class TurnManager
 
     public UnityEvent nextTurnEvent = new UnityEvent();
 
+    public TempPlayer currentPlayer;
+
     //Initalize the turn system with the given teams
     public void InitializeTurnSystem(BattleController bc, List<TempPlayer> tempPlayers)
     {
@@ -54,7 +56,9 @@ public class TurnManager
         {
             //Tell the fastest player they can act
             Debug.Log("Start1");
+            currentPlayer = players[0];
             players[0].StartTurn(this);
+
         }
 
         //Wait until player acts then we will call this again

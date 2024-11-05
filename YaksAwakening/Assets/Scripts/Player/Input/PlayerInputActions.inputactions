@@ -160,6 +160,54 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Battle",
+            "id": "f88e3b4c-a93f-4f6c-8e98-e1ffe3d9fef9",
+            "actions": [
+                {
+                    "name": "SwitchLeft",
+                    "type": "Button",
+                    "id": "cd20be4c-bd30-46a9-bd76-85b05d88e012",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SwitchRight",
+                    "type": "Button",
+                    "id": "cc752ffb-45a6-4e4a-9a76-ed8ce191d9e0",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "596c8aa8-a91b-413f-b358-af23348404ff",
+                    "path": "<Keyboard>/leftBracket",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bbb48b64-ebdf-440a-ad46-ae6d5c594b07",
+                    "path": "<Keyboard>/rightBracket",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

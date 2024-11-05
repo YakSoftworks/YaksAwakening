@@ -182,6 +182,54 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Battle"",
+            ""id"": ""f88e3b4c-a93f-4f6c-8e98-e1ffe3d9fef9"",
+            ""actions"": [
+                {
+                    ""name"": ""SwitchLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""cd20be4c-bd30-46a9-bd76-85b05d88e012"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""cc752ffb-45a6-4e4a-9a76-ed8ce191d9e0"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""596c8aa8-a91b-413f-b358-af23348404ff"",
+                    ""path"": ""<Keyboard>/leftBracket"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bbb48b64-ebdf-440a-ad46-ae6d5c594b07"",
+                    ""path"": ""<Keyboard>/rightBracket"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -195,12 +243,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_OpenInventory = m_UI.FindAction("OpenInventory", throwIfNotFound: true);
         m_UI_OpenMap = m_UI.FindAction("OpenMap", throwIfNotFound: true);
+        // Battle
+        m_Battle = asset.FindActionMap("Battle", throwIfNotFound: true);
+        m_Battle_SwitchLeft = m_Battle.FindAction("SwitchLeft", throwIfNotFound: true);
+        m_Battle_SwitchRight = m_Battle.FindAction("SwitchRight", throwIfNotFound: true);
     }
 
     ~@PlayerInputActions()
     {
         UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, PlayerInputActions.Player.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_UI.enabled, "This will cause a leak and performance issues, PlayerInputActions.UI.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_Battle.enabled, "This will cause a leak and performance issues, PlayerInputActions.Battle.Disable() has not been called.");
     }
 
     public void Dispose()
@@ -374,6 +427,60 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         }
     }
     public UIActions @UI => new UIActions(this);
+
+    // Battle
+    private readonly InputActionMap m_Battle;
+    private List<IBattleActions> m_BattleActionsCallbackInterfaces = new List<IBattleActions>();
+    private readonly InputAction m_Battle_SwitchLeft;
+    private readonly InputAction m_Battle_SwitchRight;
+    public struct BattleActions
+    {
+        private @PlayerInputActions m_Wrapper;
+        public BattleActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @SwitchLeft => m_Wrapper.m_Battle_SwitchLeft;
+        public InputAction @SwitchRight => m_Wrapper.m_Battle_SwitchRight;
+        public InputActionMap Get() { return m_Wrapper.m_Battle; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(BattleActions set) { return set.Get(); }
+        public void AddCallbacks(IBattleActions instance)
+        {
+            if (instance == null || m_Wrapper.m_BattleActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_BattleActionsCallbackInterfaces.Add(instance);
+            @SwitchLeft.started += instance.OnSwitchLeft;
+            @SwitchLeft.performed += instance.OnSwitchLeft;
+            @SwitchLeft.canceled += instance.OnSwitchLeft;
+            @SwitchRight.started += instance.OnSwitchRight;
+            @SwitchRight.performed += instance.OnSwitchRight;
+            @SwitchRight.canceled += instance.OnSwitchRight;
+        }
+
+        private void UnregisterCallbacks(IBattleActions instance)
+        {
+            @SwitchLeft.started -= instance.OnSwitchLeft;
+            @SwitchLeft.performed -= instance.OnSwitchLeft;
+            @SwitchLeft.canceled -= instance.OnSwitchLeft;
+            @SwitchRight.started -= instance.OnSwitchRight;
+            @SwitchRight.performed -= instance.OnSwitchRight;
+            @SwitchRight.canceled -= instance.OnSwitchRight;
+        }
+
+        public void RemoveCallbacks(IBattleActions instance)
+        {
+            if (m_Wrapper.m_BattleActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IBattleActions instance)
+        {
+            foreach (var item in m_Wrapper.m_BattleActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_BattleActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public BattleActions @Battle => new BattleActions(this);
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
@@ -384,5 +491,10 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     {
         void OnOpenInventory(InputAction.CallbackContext context);
         void OnOpenMap(InputAction.CallbackContext context);
+    }
+    public interface IBattleActions
+    {
+        void OnSwitchLeft(InputAction.CallbackContext context);
+        void OnSwitchRight(InputAction.CallbackContext context);
     }
 }

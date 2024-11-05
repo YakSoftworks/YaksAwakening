@@ -6,7 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "P_", menuName = "Turn/TempPlayer")]
 public class TempPlayer : ScriptableObject, System.IComparable<TempPlayer>
 {
-    [SerializeField] private string name;
+    public string characterName;
 
 
     public BattleAction attackAction;
@@ -57,6 +57,8 @@ public class TempPlayer : ScriptableObject, System.IComparable<TempPlayer>
     [SerializeField] private float speedEffectMultiplier = 1f;
 
     [SerializeField] private float speedEffectBias = 0f;
+
+    private int currentTargetIndex=0;
 
     private TurnManager turnManager;
 
@@ -151,6 +153,26 @@ public class TempPlayer : ScriptableObject, System.IComparable<TempPlayer>
         List<TempPlayer> enemies = owningController.GetEnemies(this);
 
         return enemies[Random.Range(0, enemies.Count)];
+
+    }
+
+    public TempPlayer GetInitialTarget()
+    {
+
+        return owningController.GetEnemies(this)[currentTargetIndex];
+    }
+
+    public void IncrementCurrentTarget(int increment)
+    {
+        if (owningController.GetIsTargeting())
+        {
+            List<TempPlayer> enemies = owningController.GetEnemies(this);
+
+            currentTargetIndex = ((currentTargetIndex+increment)+enemies.Count)%enemies.Count;
+
+            owningController.UpdateActionUI(enemies[currentTargetIndex]);
+        }
+
 
     }
 }
