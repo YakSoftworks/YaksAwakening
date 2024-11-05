@@ -8,14 +8,12 @@ public class TempPlayer : ScriptableObject, System.IComparable<TempPlayer>
 {
     public string characterName;
 
+    
 
     public BattleAction attackAction;
 
     public BattleAction waitAction;
-
-    //DEBUG:::
-    [SerializeField] private BattleAction DebugAction;
-
+    
     [SerializeField] private float maxHealth;
 
     [SerializeField] private float currentHealth;
@@ -62,11 +60,13 @@ public class TempPlayer : ScriptableObject, System.IComparable<TempPlayer>
 
     private TurnManager turnManager;
 
+    //Add to our multiplier - Called in TurnManager
     public void IncrementTimeSinceLastAction(float increment)
     {
         timeSinceLastAction += increment;
     }
 
+    //Get the player's current speed 
     public float GetCurrentBattleSpeed() {
 
 
@@ -84,15 +84,17 @@ public class TempPlayer : ScriptableObject, System.IComparable<TempPlayer>
     {
 
         Debug.Log("Starting Player Turn");
-        owningController.actionMenu.PromptPlayerAction(this);
 
-        //This function is to bring up the prompt for the player to take their turn
+        //TODO: Future Update: Move from owningController to attached To Player In Scene
+        //Tell the controller to bring up the actionMenu
+        owningController.actionMenu.PromptPlayerAction(this);
 
         //Set the reference to the turn manager
         turnManager = manager;
     }
 
     //When the user has selected their action and target, they can take their action and prompt the manager to do the next turn
+    //Called from the UI
     public void TakeTurn(BattleAction action, TempPlayer target)
     {
         //Do the action
@@ -104,20 +106,24 @@ public class TempPlayer : ScriptableObject, System.IComparable<TempPlayer>
 
         //Tell the manger to do the next turn
         Debug.Log("Ending Turn");
-        
+
+        //Start the next turn
         turnManager.nextTurnEvent.Invoke();
 
     }
 
+    //Update Our Multiplier - Used by BattleActions
     public void SetTurnSpeedMultiplier(float multiplier)
     {
         turnSpeedMultiplier = multiplier;
     }
 
+    //Subtract float from our current health
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
 
+        //If our health = 0, we have died
         if (currentHealth < 1)
         {
             Debug.Log($"{name} has died!");
@@ -125,6 +131,7 @@ public class TempPlayer : ScriptableObject, System.IComparable<TempPlayer>
             owningController.PlayerDied(this);
 
         }
+        //Otherwise we are still alive
         else
         {
             Debug.Log($"{name} has {currentHealth} remaining");
@@ -133,43 +140,44 @@ public class TempPlayer : ScriptableObject, System.IComparable<TempPlayer>
 
     }
 
-    public void ResetMultipliers()
-    {
-        turnSpeedMultiplier = 1f;
-        timeSinceLastAction = 1f;
-
-        currentHealth = maxHealth;
-
-
-    }
-
+    //Compare the currentSpeeds between two players
     public int CompareTo(TempPlayer other)
     {
+
         return 1-(GetCurrentBattleSpeed().CompareTo(other.GetCurrentBattleSpeed()));
     }
 
+    //Choose a random target from our enemies
     public TempPlayer GetRandomTarget()
     {
+        //Get our enemies from the controller
         List<TempPlayer> enemies = owningController.GetEnemies(this);
 
+        //return a random enemy
         return enemies[Random.Range(0, enemies.Count)];
 
     }
 
+    //Get our last indexedTarget
     public TempPlayer GetInitialTarget()
     {
-
-        return owningController.GetEnemies(this)[currentTargetIndex];
+        //TODO: Fix for alive/dead enemies
+        List<TempPlayer> enemies = owningController.GetEnemies(this); // Get our enemies
+        return enemies[currentTargetIndex % enemies.Count]; // Mod in case the index died and become out of bounds
     }
 
     public void IncrementCurrentTarget(int increment)
     {
+        //If we are targeting
         if (owningController.GetIsTargeting())
         {
+            //get our enemies
             List<TempPlayer> enemies = owningController.GetEnemies(this);
 
+            //Get the new index
             currentTargetIndex = ((currentTargetIndex+increment)+enemies.Count)%enemies.Count;
 
+            //Update the UI
             owningController.UpdateActionUI(enemies[currentTargetIndex]);
         }
 
