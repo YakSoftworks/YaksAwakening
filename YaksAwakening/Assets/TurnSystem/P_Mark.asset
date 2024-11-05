@@ -16,7 +16,7 @@ MonoBehaviour:
   attackAction: {fileID: 11400000, guid: 05f240e995a0f48cb9b326d3331538f3, type: 2}
   waitAction: {fileID: 11400000, guid: 8829df066837142f7b541ff309e970d9, type: 2}
   maxHealth: 100
-  currentHealth: -28
+  currentHealth: 1
   owningController: {fileID: 0}
   strength: 16
   weight: 16

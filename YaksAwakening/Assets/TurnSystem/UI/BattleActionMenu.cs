@@ -25,6 +25,17 @@ public class BattleActionMenu : MonoBehaviour
 
     private Label currentTargetLabel;
 
+    #region Character Information
+
+    private VisualElement playerInformationContainer;
+
+    private Label playerNameLabel;
+
+    private Label playerHealthLabel;
+
+    #endregion
+
+
     #endregion
 
     private TempPlayer attachedPlayer;
@@ -51,6 +62,11 @@ public class BattleActionMenu : MonoBehaviour
         targetingContainer = rootElement.Q<VisualElement>("TargetingContainer");
 
         currentTargetLabel = rootElement.Q<Label>("TargetName");
+
+
+        playerInformationContainer = rootElement.Q<VisualElement>("playerInformationContainer");
+        playerNameLabel = rootElement.Q<Label>("CurrentPlayerInformation");
+        playerHealthLabel = rootElement.Q<Label>("CurrentPlayerHealth");
 
 
 
@@ -86,6 +102,13 @@ public class BattleActionMenu : MonoBehaviour
         actionContainer.style.visibility = Visibility.Visible;
         //Set player reference
         attachedPlayer = player;
+
+        
+        playerNameLabel.text = "Name: " + attachedPlayer.characterName;
+        playerHealthLabel.text =
+            $"Health: {attachedPlayer.currentHealth}/{attachedPlayer.maxHealth}";
+        playerInformationContainer.style.visibility = Visibility.Visible;
+
     }
 
     private void AttackButtonPressed()
@@ -97,8 +120,10 @@ public class BattleActionMenu : MonoBehaviour
             //Hide the menus
             targetingContainer.style.visibility = Visibility.Hidden;
             actionContainer.style.visibility = Visibility.Hidden;
+            playerInformationContainer.style.visibility = Visibility.Hidden;
             //tell the player to take their turn
             attachedPlayer.TakeTurn(attachedPlayer.attackAction, currentTarget);
+            
             return;
         }
         //Otherwise,
@@ -127,6 +152,7 @@ public class BattleActionMenu : MonoBehaviour
         //Tell the player to take a wait action
         actionContainer.style.visibility = Visibility.Hidden;
         targetingContainer.style.visibility = Visibility.Hidden;
+        playerInformationContainer.style.visibility = Visibility.Hidden;
         attachedPlayer.TakeTurn(attachedPlayer.waitAction, null);
         
     }
@@ -161,6 +187,8 @@ public class BattleActionMenu : MonoBehaviour
         //Maybe Do More
         Debug.Log("Congratulations Winning Team...");
     }
+
+    
 
 
 

@@ -14,9 +14,9 @@ public class TempPlayer : ScriptableObject, System.IComparable<TempPlayer>
 
     public BattleAction waitAction;
     
-    [SerializeField] private float maxHealth;
+    public float maxHealth;
 
-    [SerializeField] private float currentHealth;
+    public float currentHealth;
 
     public BattleController owningController;
 
