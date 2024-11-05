@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
     {
         SubscribeInputActions();
 
-        SwitchActionMap("Player");
+        SwitchActionMap("UI");
 
     }
 

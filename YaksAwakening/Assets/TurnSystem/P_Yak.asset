@@ -12,14 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 664abc7d8aceb4c91af5260e8e73153c, type: 3}
   m_Name: P_Yak
   m_EditorClassIdentifier: 
-  name: Yak
-  availableActions:
-  - {fileID: 11400000, guid: 05f240e995a0f48cb9b326d3331538f3, type: 2}
-  - {fileID: 11400000, guid: 8829df066837142f7b541ff309e970d9, type: 2}
+  characterName: Yak
+  attackAction: {fileID: 11400000, guid: 05f240e995a0f48cb9b326d3331538f3, type: 2}
+  waitAction: {fileID: 11400000, guid: 8829df066837142f7b541ff309e970d9, type: 2}
   DebugAction: {fileID: 11400000, guid: 8829df066837142f7b541ff309e970d9, type: 2}
-  target: {fileID: 11400000, guid: 21ba0afee170046638391fbfc573335c, type: 2}
   maxHealth: 200
-  currentHealth: 200
+  currentHealth: 184
   owningController: {fileID: 0}
   strength: 32
   weight: 16
