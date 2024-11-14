@@ -6,6 +6,12 @@ using UnityEngine;
 public class PrintStringAction : CharacterActions
 {
     [SerializeField] private string message;
+
+    public override void UpdateAction(float passedTime)
+    {
+        return;
+    }
+
     protected override void Act(PlayerBattleController player)
     {
         Debug.Log(message);
@@ -13,7 +19,9 @@ public class PrintStringAction : CharacterActions
 
     protected override bool CheckIsUsable(PlayerBattleController player)
     {
-        //No Special Conditions
+        //Always Usable
         return true;
     }
+
+    
 }

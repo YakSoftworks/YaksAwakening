@@ -24,7 +24,7 @@ public partial class @ActiveBattleInput: IInputActionCollection2, IDisposable
     ""name"": ""ActiveBattleInput"",
     ""maps"": [
         {
-            ""name"": ""ActiveBattle"",
+            ""name"": ""AssignedActions"",
             ""id"": ""cea2a61a-925f-4fb4-ae08-4d7cb635ced2"",
             ""actions"": [
                 {
@@ -112,24 +112,6 @@ public partial class @ActiveBattleInput: IInputActionCollection2, IDisposable
                     ""name"": ""Zero"",
                     ""type"": ""Button"",
                     ""id"": ""da1869f6-0f5f-4c36-a721-6d1d9bd6724f"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""ActionL"",
-                    ""type"": ""Button"",
-                    ""id"": ""bbf245a4-0e9f-4eec-aadb-90d50512ba11"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""ActionR"",
-                    ""type"": ""Button"",
-                    ""id"": ""e18e0a65-6222-43bf-ba32-c33d9b885839"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -246,10 +228,36 @@ public partial class @ActiveBattleInput: IInputActionCollection2, IDisposable
                     ""action"": ""Zero"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""ActiveBattle"",
+            ""id"": ""a614180d-6fd5-416d-85e5-c1cbe6247ecf"",
+            ""actions"": [
+                {
+                    ""name"": ""ActionL"",
+                    ""type"": ""Button"",
+                    ""id"": ""39bc071b-3a96-4753-bcaf-ced10f77f864"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""ActionR"",
+                    ""type"": ""Button"",
+                    ""id"": ""20ed3bfa-729c-4af6-8b1d-582b60195dfb"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
                     ""name"": """",
-                    ""id"": ""30bfc223-c933-4b61-86e2-7d0ae9e0f0d8"",
+                    ""id"": ""73288ef5-8e5b-43d0-a024-8245494368de"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -260,7 +268,7 @@ public partial class @ActiveBattleInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""70794462-3d48-4f63-a401-198109f1cd33"",
+                    ""id"": ""54f023f0-ac26-4560-b0cb-64902c85afd3"",
                     ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -274,24 +282,27 @@ public partial class @ActiveBattleInput: IInputActionCollection2, IDisposable
     ],
     ""controlSchemes"": []
 }");
+        // AssignedActions
+        m_AssignedActions = asset.FindActionMap("AssignedActions", throwIfNotFound: true);
+        m_AssignedActions_One = m_AssignedActions.FindAction("One", throwIfNotFound: true);
+        m_AssignedActions_Two = m_AssignedActions.FindAction("Two", throwIfNotFound: true);
+        m_AssignedActions_Three = m_AssignedActions.FindAction("Three", throwIfNotFound: true);
+        m_AssignedActions_Four = m_AssignedActions.FindAction("Four", throwIfNotFound: true);
+        m_AssignedActions_Five = m_AssignedActions.FindAction("Five", throwIfNotFound: true);
+        m_AssignedActions_Six = m_AssignedActions.FindAction("Six", throwIfNotFound: true);
+        m_AssignedActions_Seven = m_AssignedActions.FindAction("Seven", throwIfNotFound: true);
+        m_AssignedActions_Eight = m_AssignedActions.FindAction("Eight", throwIfNotFound: true);
+        m_AssignedActions_Nine = m_AssignedActions.FindAction("Nine", throwIfNotFound: true);
+        m_AssignedActions_Zero = m_AssignedActions.FindAction("Zero", throwIfNotFound: true);
         // ActiveBattle
         m_ActiveBattle = asset.FindActionMap("ActiveBattle", throwIfNotFound: true);
-        m_ActiveBattle_One = m_ActiveBattle.FindAction("One", throwIfNotFound: true);
-        m_ActiveBattle_Two = m_ActiveBattle.FindAction("Two", throwIfNotFound: true);
-        m_ActiveBattle_Three = m_ActiveBattle.FindAction("Three", throwIfNotFound: true);
-        m_ActiveBattle_Four = m_ActiveBattle.FindAction("Four", throwIfNotFound: true);
-        m_ActiveBattle_Five = m_ActiveBattle.FindAction("Five", throwIfNotFound: true);
-        m_ActiveBattle_Six = m_ActiveBattle.FindAction("Six", throwIfNotFound: true);
-        m_ActiveBattle_Seven = m_ActiveBattle.FindAction("Seven", throwIfNotFound: true);
-        m_ActiveBattle_Eight = m_ActiveBattle.FindAction("Eight", throwIfNotFound: true);
-        m_ActiveBattle_Nine = m_ActiveBattle.FindAction("Nine", throwIfNotFound: true);
-        m_ActiveBattle_Zero = m_ActiveBattle.FindAction("Zero", throwIfNotFound: true);
         m_ActiveBattle_ActionL = m_ActiveBattle.FindAction("ActionL", throwIfNotFound: true);
         m_ActiveBattle_ActionR = m_ActiveBattle.FindAction("ActionR", throwIfNotFound: true);
     }
 
     ~@ActiveBattleInput()
     {
+        UnityEngine.Debug.Assert(!m_AssignedActions.enabled, "This will cause a leak and performance issues, ActiveBattleInput.AssignedActions.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_ActiveBattle.enabled, "This will cause a leak and performance issues, ActiveBattleInput.ActiveBattle.Disable() has not been called.");
     }
 
@@ -351,46 +362,42 @@ public partial class @ActiveBattleInput: IInputActionCollection2, IDisposable
         return asset.FindBinding(bindingMask, out action);
     }
 
-    // ActiveBattle
-    private readonly InputActionMap m_ActiveBattle;
-    private List<IActiveBattleActions> m_ActiveBattleActionsCallbackInterfaces = new List<IActiveBattleActions>();
-    private readonly InputAction m_ActiveBattle_One;
-    private readonly InputAction m_ActiveBattle_Two;
-    private readonly InputAction m_ActiveBattle_Three;
-    private readonly InputAction m_ActiveBattle_Four;
-    private readonly InputAction m_ActiveBattle_Five;
-    private readonly InputAction m_ActiveBattle_Six;
-    private readonly InputAction m_ActiveBattle_Seven;
-    private readonly InputAction m_ActiveBattle_Eight;
-    private readonly InputAction m_ActiveBattle_Nine;
-    private readonly InputAction m_ActiveBattle_Zero;
-    private readonly InputAction m_ActiveBattle_ActionL;
-    private readonly InputAction m_ActiveBattle_ActionR;
-    public struct ActiveBattleActions
+    // AssignedActions
+    private readonly InputActionMap m_AssignedActions;
+    private List<IAssignedActionsActions> m_AssignedActionsActionsCallbackInterfaces = new List<IAssignedActionsActions>();
+    private readonly InputAction m_AssignedActions_One;
+    private readonly InputAction m_AssignedActions_Two;
+    private readonly InputAction m_AssignedActions_Three;
+    private readonly InputAction m_AssignedActions_Four;
+    private readonly InputAction m_AssignedActions_Five;
+    private readonly InputAction m_AssignedActions_Six;
+    private readonly InputAction m_AssignedActions_Seven;
+    private readonly InputAction m_AssignedActions_Eight;
+    private readonly InputAction m_AssignedActions_Nine;
+    private readonly InputAction m_AssignedActions_Zero;
+    public struct AssignedActionsActions
     {
         private @ActiveBattleInput m_Wrapper;
-        public ActiveBattleActions(@ActiveBattleInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @One => m_Wrapper.m_ActiveBattle_One;
-        public InputAction @Two => m_Wrapper.m_ActiveBattle_Two;
-        public InputAction @Three => m_Wrapper.m_ActiveBattle_Three;
-        public InputAction @Four => m_Wrapper.m_ActiveBattle_Four;
-        public InputAction @Five => m_Wrapper.m_ActiveBattle_Five;
-        public InputAction @Six => m_Wrapper.m_ActiveBattle_Six;
-        public InputAction @Seven => m_Wrapper.m_ActiveBattle_Seven;
-        public InputAction @Eight => m_Wrapper.m_ActiveBattle_Eight;
-        public InputAction @Nine => m_Wrapper.m_ActiveBattle_Nine;
-        public InputAction @Zero => m_Wrapper.m_ActiveBattle_Zero;
-        public InputAction @ActionL => m_Wrapper.m_ActiveBattle_ActionL;
-        public InputAction @ActionR => m_Wrapper.m_ActiveBattle_ActionR;
-        public InputActionMap Get() { return m_Wrapper.m_ActiveBattle; }
+        public AssignedActionsActions(@ActiveBattleInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @One => m_Wrapper.m_AssignedActions_One;
+        public InputAction @Two => m_Wrapper.m_AssignedActions_Two;
+        public InputAction @Three => m_Wrapper.m_AssignedActions_Three;
+        public InputAction @Four => m_Wrapper.m_AssignedActions_Four;
+        public InputAction @Five => m_Wrapper.m_AssignedActions_Five;
+        public InputAction @Six => m_Wrapper.m_AssignedActions_Six;
+        public InputAction @Seven => m_Wrapper.m_AssignedActions_Seven;
+        public InputAction @Eight => m_Wrapper.m_AssignedActions_Eight;
+        public InputAction @Nine => m_Wrapper.m_AssignedActions_Nine;
+        public InputAction @Zero => m_Wrapper.m_AssignedActions_Zero;
+        public InputActionMap Get() { return m_Wrapper.m_AssignedActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(ActiveBattleActions set) { return set.Get(); }
-        public void AddCallbacks(IActiveBattleActions instance)
+        public static implicit operator InputActionMap(AssignedActionsActions set) { return set.Get(); }
+        public void AddCallbacks(IAssignedActionsActions instance)
         {
-            if (instance == null || m_Wrapper.m_ActiveBattleActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_ActiveBattleActionsCallbackInterfaces.Add(instance);
+            if (instance == null || m_Wrapper.m_AssignedActionsActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_AssignedActionsActionsCallbackInterfaces.Add(instance);
             @One.started += instance.OnOne;
             @One.performed += instance.OnOne;
             @One.canceled += instance.OnOne;
@@ -421,15 +428,9 @@ public partial class @ActiveBattleInput: IInputActionCollection2, IDisposable
             @Zero.started += instance.OnZero;
             @Zero.performed += instance.OnZero;
             @Zero.canceled += instance.OnZero;
-            @ActionL.started += instance.OnActionL;
-            @ActionL.performed += instance.OnActionL;
-            @ActionL.canceled += instance.OnActionL;
-            @ActionR.started += instance.OnActionR;
-            @ActionR.performed += instance.OnActionR;
-            @ActionR.canceled += instance.OnActionR;
         }
 
-        private void UnregisterCallbacks(IActiveBattleActions instance)
+        private void UnregisterCallbacks(IAssignedActionsActions instance)
         {
             @One.started -= instance.OnOne;
             @One.performed -= instance.OnOne;
@@ -461,6 +462,54 @@ public partial class @ActiveBattleInput: IInputActionCollection2, IDisposable
             @Zero.started -= instance.OnZero;
             @Zero.performed -= instance.OnZero;
             @Zero.canceled -= instance.OnZero;
+        }
+
+        public void RemoveCallbacks(IAssignedActionsActions instance)
+        {
+            if (m_Wrapper.m_AssignedActionsActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IAssignedActionsActions instance)
+        {
+            foreach (var item in m_Wrapper.m_AssignedActionsActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_AssignedActionsActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public AssignedActionsActions @AssignedActions => new AssignedActionsActions(this);
+
+    // ActiveBattle
+    private readonly InputActionMap m_ActiveBattle;
+    private List<IActiveBattleActions> m_ActiveBattleActionsCallbackInterfaces = new List<IActiveBattleActions>();
+    private readonly InputAction m_ActiveBattle_ActionL;
+    private readonly InputAction m_ActiveBattle_ActionR;
+    public struct ActiveBattleActions
+    {
+        private @ActiveBattleInput m_Wrapper;
+        public ActiveBattleActions(@ActiveBattleInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @ActionL => m_Wrapper.m_ActiveBattle_ActionL;
+        public InputAction @ActionR => m_Wrapper.m_ActiveBattle_ActionR;
+        public InputActionMap Get() { return m_Wrapper.m_ActiveBattle; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(ActiveBattleActions set) { return set.Get(); }
+        public void AddCallbacks(IActiveBattleActions instance)
+        {
+            if (instance == null || m_Wrapper.m_ActiveBattleActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_ActiveBattleActionsCallbackInterfaces.Add(instance);
+            @ActionL.started += instance.OnActionL;
+            @ActionL.performed += instance.OnActionL;
+            @ActionL.canceled += instance.OnActionL;
+            @ActionR.started += instance.OnActionR;
+            @ActionR.performed += instance.OnActionR;
+            @ActionR.canceled += instance.OnActionR;
+        }
+
+        private void UnregisterCallbacks(IActiveBattleActions instance)
+        {
             @ActionL.started -= instance.OnActionL;
             @ActionL.performed -= instance.OnActionL;
             @ActionL.canceled -= instance.OnActionL;
@@ -484,7 +533,7 @@ public partial class @ActiveBattleInput: IInputActionCollection2, IDisposable
         }
     }
     public ActiveBattleActions @ActiveBattle => new ActiveBattleActions(this);
-    public interface IActiveBattleActions
+    public interface IAssignedActionsActions
     {
         void OnOne(InputAction.CallbackContext context);
         void OnTwo(InputAction.CallbackContext context);
@@ -496,6 +545,9 @@ public partial class @ActiveBattleInput: IInputActionCollection2, IDisposable
         void OnEight(InputAction.CallbackContext context);
         void OnNine(InputAction.CallbackContext context);
         void OnZero(InputAction.CallbackContext context);
+    }
+    public interface IActiveBattleActions
+    {
         void OnActionL(InputAction.CallbackContext context);
         void OnActionR(InputAction.CallbackContext context);
     }

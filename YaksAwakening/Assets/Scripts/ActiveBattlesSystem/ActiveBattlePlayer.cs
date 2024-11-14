@@ -8,6 +8,16 @@ public class ActiveBattlePlayer : MonoBehaviour
 
 
     [SerializeField] PlayerBattleController controller;
+    [SerializeField] private PlayerStats stats;
+
+    [SerializeField] private BattlePlayerController currentTarget;
+
+
+
+    public BattlePlayerController GetCurrentTarget()
+    {
+        return currentTarget;
+    }
 
 
     private ActiveBattleInput input;
@@ -23,12 +33,12 @@ public class ActiveBattlePlayer : MonoBehaviour
     {
         SubscibeInputActions();
 
-        input.ActiveBattle.Enable();
+        input.AssignedActions.Enable();
     }
 
     private void OnDisable()
     {
-        input.ActiveBattle.Disable();
+        input.AssignedActions.Disable();
     }
 
     private void OnDestroy()
@@ -38,16 +48,16 @@ public class ActiveBattlePlayer : MonoBehaviour
 
     private void SubscibeInputActions()
     {
-        input.ActiveBattle.One.performed += (InputAction.CallbackContext context) => ActionPerformed(0);
-        input.ActiveBattle.Two.performed += (InputAction.CallbackContext context) => ActionPerformed(1);
-        input.ActiveBattle.Three.performed += (InputAction.CallbackContext context) => ActionPerformed(2);
-        input.ActiveBattle.Four.performed += (InputAction.CallbackContext context) => ActionPerformed(3);
-        input.ActiveBattle.Five.performed += (InputAction.CallbackContext context) => ActionPerformed(4);
-        input.ActiveBattle.Six.performed += (InputAction.CallbackContext context) => ActionPerformed(5);
-        input.ActiveBattle.Seven.performed += (InputAction.CallbackContext context) => ActionPerformed(6);
-        input.ActiveBattle.Eight.performed += (InputAction.CallbackContext context) => ActionPerformed(7);
-        input.ActiveBattle.Nine.performed += (InputAction.CallbackContext context) => ActionPerformed(8);
-        input.ActiveBattle.Zero.performed += (InputAction.CallbackContext context) => ActionPerformed(9);
+        input.AssignedActions.One.performed += (InputAction.CallbackContext context) => ActionPerformed(0);
+        input.AssignedActions.Two.performed += (InputAction.CallbackContext context) => ActionPerformed(1);
+        input.AssignedActions.Three.performed += (InputAction.CallbackContext context) => ActionPerformed(2);
+        input.AssignedActions.Four.performed += (InputAction.CallbackContext context) => ActionPerformed(3);
+        input.AssignedActions.Five.performed += (InputAction.CallbackContext context) => ActionPerformed(4);
+        input.AssignedActions.Six.performed += (InputAction.CallbackContext context) => ActionPerformed(5);
+        input.AssignedActions.Seven.performed += (InputAction.CallbackContext context) => ActionPerformed(6);
+        input.AssignedActions.Eight.performed += (InputAction.CallbackContext context) => ActionPerformed(7);
+        input.AssignedActions.Nine.performed += (InputAction.CallbackContext context) => ActionPerformed(8);
+        input.AssignedActions.Zero.performed += (InputAction.CallbackContext context) => ActionPerformed(9);
         input.ActiveBattle.ActionL.performed += (InputAction.CallbackContext context) => ActionPerformed(10);
         input.ActiveBattle.ActionR.performed += (InputAction.CallbackContext context) => ActionPerformed(11);
 
@@ -55,16 +65,16 @@ public class ActiveBattlePlayer : MonoBehaviour
 
     private void UnSubscribeActions()
     {
-        input.ActiveBattle.One.performed -= (InputAction.CallbackContext context) => ActionPerformed(0);
-        input.ActiveBattle.Two.performed -= (InputAction.CallbackContext context) => ActionPerformed(1);
-        input.ActiveBattle.Three.performed -= (InputAction.CallbackContext context) => ActionPerformed(2);
-        input.ActiveBattle.Four.performed -= (InputAction.CallbackContext context) => ActionPerformed(3);
-        input.ActiveBattle.Five.performed -= (InputAction.CallbackContext context) => ActionPerformed(4);
-        input.ActiveBattle.Six.performed -= (InputAction.CallbackContext context) => ActionPerformed(5);
-        input.ActiveBattle.Seven.performed -= (InputAction.CallbackContext context) => ActionPerformed(6);
-        input.ActiveBattle.Eight.performed -= (InputAction.CallbackContext context) => ActionPerformed(7);
-        input.ActiveBattle.Nine.performed -= (InputAction.CallbackContext context) => ActionPerformed(8);
-        input.ActiveBattle.Zero.performed -= (InputAction.CallbackContext context) => ActionPerformed(9);
+        input.AssignedActions.One.performed -= (InputAction.CallbackContext context) => ActionPerformed(0);
+        input.AssignedActions.Two.performed -= (InputAction.CallbackContext context) => ActionPerformed(1);
+        input.AssignedActions.Three.performed -= (InputAction.CallbackContext context) => ActionPerformed(2);
+        input.AssignedActions.Four.performed -= (InputAction.CallbackContext context) => ActionPerformed(3);
+        input.AssignedActions.Five.performed -= (InputAction.CallbackContext context) => ActionPerformed(4);
+        input.AssignedActions.Six.performed -= (InputAction.CallbackContext context) => ActionPerformed(5);
+        input.AssignedActions.Seven.performed -= (InputAction.CallbackContext context) => ActionPerformed(6);
+        input.AssignedActions.Eight.performed -= (InputAction.CallbackContext context) => ActionPerformed(7);
+        input.AssignedActions.Nine.performed -= (InputAction.CallbackContext context) => ActionPerformed(8);
+        input.AssignedActions.Zero.performed -= (InputAction.CallbackContext context) => ActionPerformed(9);
         input.ActiveBattle.ActionL.performed -= (InputAction.CallbackContext context) => ActionPerformed(10);
         input.ActiveBattle.ActionR.performed -= (InputAction.CallbackContext context) => ActionPerformed(11);
     }

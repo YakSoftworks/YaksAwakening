@@ -2,7 +2,7 @@
     "name": "ActiveBattleInput",
     "maps": [
         {
-            "name": "ActiveBattle",
+            "name": "AssignedActions",
             "id": "cea2a61a-925f-4fb4-ae08-4d7cb635ced2",
             "actions": [
                 {
@@ -90,24 +90,6 @@
                     "name": "Zero",
                     "type": "Button",
                     "id": "da1869f6-0f5f-4c36-a721-6d1d9bd6724f",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "ActionL",
-                    "type": "Button",
-                    "id": "bbf245a4-0e9f-4eec-aadb-90d50512ba11",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "ActionR",
-                    "type": "Button",
-                    "id": "e18e0a65-6222-43bf-ba32-c33d9b885839",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -224,10 +206,36 @@
                     "action": "Zero",
                     "isComposite": false,
                     "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "ActiveBattle",
+            "id": "a614180d-6fd5-416d-85e5-c1cbe6247ecf",
+            "actions": [
+                {
+                    "name": "ActionL",
+                    "type": "Button",
+                    "id": "39bc071b-3a96-4753-bcaf-ced10f77f864",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
+                    "name": "ActionR",
+                    "type": "Button",
+                    "id": "20ed3bfa-729c-4af6-8b1d-582b60195dfb",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
                     "name": "",
-                    "id": "30bfc223-c933-4b61-86e2-7d0ae9e0f0d8",
+                    "id": "73288ef5-8e5b-43d0-a024-8245494368de",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
@@ -238,7 +246,7 @@
                 },
                 {
                     "name": "",
-                    "id": "70794462-3d48-4f63-a401-198109f1cd33",
+                    "id": "54f023f0-ac26-4560-b0cb-64902c85afd3",
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
