@@ -36,7 +36,10 @@ public class ResetableObject : MonoBehaviour
         //If an object already exists, destory it
         if (spawnedObject != null)
         {
-            Destroy(spawnedObject);
+
+            Debug.Log("Destorying old object");
+            Destroy(spawnedObject.gameObject);
+            
         }
         //Create new instance of the object
         Debug.Log("Creating New Object");
@@ -72,7 +75,7 @@ public class ResetableObject : MonoBehaviour
     public virtual bool EnableObject()
     {
         //Check to see if we are already enabled
-        if (spawnedObject.gameObject.activeSelf)
+        if (spawnedObject.isActive)
         {
             //If we are, Log it and return false
             Debug.Log("Object already Enabled");
@@ -81,7 +84,7 @@ public class ResetableObject : MonoBehaviour
         else
         {
             //Otherwise, enable and return true
-            spawnedObject.gameObject.SetActive(true);
+            spawnedObject.SetPauseObject(false);
             return true;
         }
     }
@@ -92,7 +95,7 @@ public class ResetableObject : MonoBehaviour
         if (spawnedObject == null) { return false; }
 
         //Check to see if already disabled
-        if (!spawnedObject.gameObject.activeSelf)
+        if (!spawnedObject.isActive)
         {
             //If we are, Log it and return false
             Debug.Log("Object already Disabled");
@@ -101,7 +104,7 @@ public class ResetableObject : MonoBehaviour
         else
         {
             //Otherwise, disable and return true
-            spawnedObject.gameObject.SetActive(false);
+            spawnedObject.SetPauseObject(false);
             return true;
         }
     }

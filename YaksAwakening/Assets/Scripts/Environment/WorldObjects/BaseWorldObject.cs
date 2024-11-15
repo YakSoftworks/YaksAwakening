@@ -8,13 +8,34 @@ public class BaseWorldObject : MonoBehaviour
     //Boolean for whether we can update on this tick
     private bool bCanUpdate = false;
 
+    public bool isActive { get { return bCanUpdate; } }
+
     private ResetableObject spawner;
+
+    [SerializeField] private MonoBehaviour[] components;
 
     //Set function
     public void SetPauseObject(bool doUpdate)
     {
         bCanUpdate = doUpdate;
         Debug.Log($"{gameObject.name} : Current State: {bCanUpdate}");
+
+        if (bCanUpdate)
+        {
+            //Enable each of the scripts
+            foreach (MonoBehaviour behaviour in components)
+            {
+                behaviour.enabled = true;
+            }
+        }
+        else
+        {
+            //Disable each of the scripts
+            foreach(MonoBehaviour behaviour in components)
+            {
+                behaviour.enabled = false;
+            }
+        }
     }
 
     public void SetSpawner(ResetableObject resetSpawner)
