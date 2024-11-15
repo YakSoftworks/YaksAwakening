@@ -68,7 +68,10 @@ public class GameManager : MonoBehaviour
         gameState = GameState.Instance;
 
         ResumeGame();
+
     }
+
+    
 
     #endregion
 

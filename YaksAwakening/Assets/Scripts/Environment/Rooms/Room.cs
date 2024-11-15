@@ -35,7 +35,6 @@ public class Room : MonoBehaviour
 
 
 
-
     #region Unity Functions
     private void Start()
     {
@@ -45,6 +44,8 @@ public class Room : MonoBehaviour
         isLoaded = false;
 
         roomBounds = new Bounds(transform.position, roomSize);
+
+        PauseRoomObjects();
 
     }
 
@@ -60,6 +61,8 @@ public class Room : MonoBehaviour
 
         }
 
+        DeactivateRoom();
+
 
     }
 
@@ -72,16 +75,18 @@ public class Room : MonoBehaviour
             respawnableItemsInScene[i].DisableObject();
         }
 
+        ResetRoom();
         //Debug.Log("Room Disabled");
     }
 
     public void EnableRoom()
     {
-
-        for(int i = 0; i < respawnableItemsInScene.Count; i++)
+        for (int i = 0; i < respawnableItemsInScene.Count; i++)
         {
             respawnableItemsInScene[i].EnableObject();
         }
+
+
 
         //Debug.Log("Room Enabled");
     }
