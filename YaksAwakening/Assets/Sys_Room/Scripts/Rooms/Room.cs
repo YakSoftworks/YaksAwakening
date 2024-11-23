@@ -45,7 +45,7 @@ public class Room : MonoBehaviour
 
         roomBounds = new Bounds(transform.position, roomSize);
 
-        PauseRoomObjects();
+        DeactivateRoomObjects();
 
     }
 
@@ -66,21 +66,46 @@ public class Room : MonoBehaviour
 
     }
 
+    public Room GetRoomFromDirection(Direction direction)
+    {
+
+        switch (direction)
+        {
+            case Direction.Up:
+                return upRoom;
+            case Direction.Right:
+                return rightRoom;
+            case Direction.Down:
+                return downRoom;
+            case Direction.Left:
+                return leftRoom;
+            default:
+                return null;
+        }
+
+    }
+
     #region Enable/Disable
 
     public void DisableRoom()
     {
+
+        //Tell the room to reset itself
+        ResetRoom();
+
         for (int i = 0; i < respawnableItemsInScene.Count; i++)
         {
             respawnableItemsInScene[i].DisableObject();
         }
 
-        ResetRoom();
-        //Debug.Log("Room Disabled");
+
     }
 
     public void EnableRoom()
     {
+        
+
+        //Enable all objects within the room
         for (int i = 0; i < respawnableItemsInScene.Count; i++)
         {
             respawnableItemsInScene[i].EnableObject();
@@ -142,38 +167,23 @@ public class Room : MonoBehaviour
 
     #endregion
 
+
+    #region Activate/Deactivate
     public void ActivateRoom()
     {
-        UnPauseRoomObjects();
+        ActivateRoomObjects();
     }
 
     public void DeactivateRoom()
     {
         Debug.Log("Deactivate 2");
-        PauseRoomObjects();
+        DeactivateRoomObjects();
         Debug.Log("Deactivate 3");
     }
 
-    public Room GetRoomFromDirection(Direction direction)
-    {
+    
 
-        switch (direction)
-        {
-            case Direction.Up:
-                return upRoom;
-            case Direction.Right:
-                return rightRoom;
-            case Direction.Down:
-                return downRoom;
-            case Direction.Left:
-                return leftRoom;
-            default:
-                return null;
-        }
-
-    }
-
-    private void PauseRoomObjects()
+    private void DeactivateRoomObjects()
     {
         for (int i = 0; i < respawnableItemsInScene.Count; i++)
         {
@@ -181,13 +191,15 @@ public class Room : MonoBehaviour
         }
     }
 
-    private void UnPauseRoomObjects()
+    private void ActivateRoomObjects()
     {
         for (int i = 0; i < respawnableItemsInScene.Count; i++)
         {
             respawnableItemsInScene[i].SetObjectUpdateStatus(true);
         }
     }
+
+    #endregion
 
 
 }

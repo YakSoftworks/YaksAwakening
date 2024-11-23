@@ -268,7 +268,7 @@ public class PlayerController : MonoBehaviour
 
         GetComponent<PlayerController>().ResumeMovement();
 
-        GameManager.Instance.EnableCurrentRoom();
+        RoomManager.Instance.EnableCurrentRoom();
 
     }
 

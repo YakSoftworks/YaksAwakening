@@ -23,7 +23,7 @@ public class ScreenBorderZone : MonoBehaviour
 
 
             //Check to see if changing rooms is valid
-            if (GameManager.Instance.ChangeRoomUsingDirection(direction))
+            if (RoomManager.Instance.ChangeRoomUsingDirection(direction))
             {
                 //Tell they player they may change rooms
                 StartCoroutine(player.MoveCameraAndPlayerToNewLocation(direction));
