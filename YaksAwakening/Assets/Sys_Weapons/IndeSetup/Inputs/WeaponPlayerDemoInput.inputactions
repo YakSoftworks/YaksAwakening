@@ -1,0 +1,54 @@
+{
+    "name": "WeaponPlayerDemoInput",
+    "maps": [
+        {
+            "name": "Demo",
+            "id": "356502ff-3539-4ac9-bb44-7b9124f89f4f",
+            "actions": [
+                {
+                    "name": "UseLeft",
+                    "type": "Button",
+                    "id": "b5b65ec7-7eb2-44da-90a1-f49931ab4315",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "UseRight",
+                    "type": "Button",
+                    "id": "7c4f33c0-fe97-49e0-8520-6a87dc6fe2d6",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "da7fc831-8738-4394-8aae-681e4d75d831",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UseLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "71a9e8a9-a434-4c0a-b969-5fd9136a9524",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UseRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
