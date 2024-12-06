@@ -4,9 +4,9 @@ using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Sword_Standard", menuName = "Weapons/Sword")]
+[CreateAssetMenu(fileName = "Weapon_Standard", menuName = "Weapons/Melee")]
 
-public class WeaponSword : WeaponBase
+public class WeaponMelee : WeaponBase
 {
     //Sizes of the boxCast Box
     [SerializeField] private float range = .5f;
@@ -20,6 +20,14 @@ public class WeaponSword : WeaponBase
         ThreeVectorStruct twinVectors = GetVectorsForShape(controller.currentDirection);
 
         RaycastHit2D[] hits = Physics2D.BoxCastAll(twinVectors.vectorA, twinVectors.vectorB, 0f, twinVectors.vectorC, castDistance);
+
+        foreach(RaycastHit2D hit in hits)
+        {
+
+            Debug.Log("Hit " + hit.collider.name);
+
+
+        }
     }
 
     public override void DrawWeaponGizmos(WeaponController controller)
