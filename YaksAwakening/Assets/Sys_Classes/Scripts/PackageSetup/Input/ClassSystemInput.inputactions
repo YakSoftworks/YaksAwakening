@@ -1,0 +1,114 @@
+{
+    "name": "ClassSystemInput",
+    "maps": [
+        {
+            "name": "DEBUG",
+            "id": "ad84613f-a563-4146-bf7d-158258cb8f85",
+            "actions": [
+                {
+                    "name": "RightChangeClass",
+                    "type": "Button",
+                    "id": "51a8928c-badd-4d3f-bef7-5eee1d87fbfd",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "LeftChangeClass",
+                    "type": "Button",
+                    "id": "ec32bfe5-5c38-4d0d-905e-4b6b6e3e4296",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "UseAbility1",
+                    "type": "Button",
+                    "id": "b0c713b0-3502-4bf1-855b-1f057b766e9d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "UseAbility2",
+                    "type": "Button",
+                    "id": "31627f78-5264-4d22-8f9c-26ca6b03dfe5",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "UseAbility3",
+                    "type": "Button",
+                    "id": "9327aa44-e772-424e-a8d0-0f78783f8592",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "3297144d-78fb-4442-b5bd-24e7799a042d",
+                    "path": "<Keyboard>/rightBracket",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightChangeClass",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8836964a-b3c4-43b7-b903-03081471b4ef",
+                    "path": "<Keyboard>/leftBracket",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftChangeClass",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "da81b527-1c5c-4824-8cc1-2f90ecfea0e2",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UseAbility1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "053439c2-2c3a-4225-9ab0-f51efe597a7e",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UseAbility2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2d008bc1-5621-4532-88f5-4ab4e136138b",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UseAbility3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
