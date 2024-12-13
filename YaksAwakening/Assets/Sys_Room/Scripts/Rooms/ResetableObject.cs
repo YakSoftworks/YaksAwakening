@@ -16,6 +16,8 @@ public class ResetableObject : MonoBehaviour
 
     private BaseWorldObject spawnedObject; //Reference to the object created
 
+    [SerializeField] public Room owningRoom;
+
     #region Unity Functions
 
     protected virtual void Start()

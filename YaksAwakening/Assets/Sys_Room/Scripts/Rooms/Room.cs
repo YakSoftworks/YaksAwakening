@@ -28,9 +28,9 @@ public class Room : MonoBehaviour
     bool isLoaded;
 
     //The distances from the center to the end in x and y
-    public static Vector3 roomSize
+    public static Vector2 roomSize
     {
-        get { return new Vector3(8, 6); }
+        get { return new Vector2(8, 6); }
     }
 
 
@@ -181,7 +181,7 @@ public class Room : MonoBehaviour
         Debug.Log("Deactivate 3");
     }
 
-    
+    #region Activate/Deactive Objects
 
     private void DeactivateRoomObjects()
     {
@@ -199,6 +199,7 @@ public class Room : MonoBehaviour
         }
     }
 
+    #endregion
     #endregion
 
 

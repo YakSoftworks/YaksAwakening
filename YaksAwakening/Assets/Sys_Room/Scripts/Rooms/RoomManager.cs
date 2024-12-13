@@ -54,7 +54,7 @@ public class RoomManager : MonoBehaviour
         if (nextRoom == null) { return false; }
 
         //Pause the currentRoom
-        Debug.Log("Deactivate 1");
+        //Debug.Log("Deactivate 1");
         currentRoom.DeactivateRoom();
 
         //Disable our neighbors except for the one we are going into
@@ -66,7 +66,7 @@ public class RoomManager : MonoBehaviour
         //Enable the rooms neighboring us
         currentRoom.EnableNeighboringRooms();
 
-        Debug.Log("Changing Rooms");
+        //Debug.Log("Changing Rooms");
 
         return true;
 

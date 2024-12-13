@@ -53,9 +53,9 @@ public class BaseWorldObject : MonoBehaviour
     }
 
 
-    protected bool CheckIsWithinRoomBounds(Vector2 position)
+    public bool CheckIsWithinRoomBounds(Vector2 position)
     {
-        Bounds roomBounds = GameManager.Instance.currentRoom.roomBounds;
+        Bounds roomBounds = spawner.owningRoom.roomBounds;
 
         if (roomBounds.Contains(position))
         {
