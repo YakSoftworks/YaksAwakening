@@ -1,25 +1,24 @@
 # Yaks Awakening
-## Current State: Slow Rolling Development
+## Unity Game System Demos
 
-## Player:
-The player is set up with movement and pausing. The general player setup is in a prefab.
+# Content
+Each system is deisgned to work independently of the others
 
-## World:
-In Prefabs, there is a RoomTemplate prefab which contains the basic prefab of the bare minimum of a room.
-This includes the Room script and the basic tilemap.
+Systems are designed to be exported as a package into other projects for quick adaptation
 
-## Core:
-The core of the game includes the game manager which handles a large portion of the room changing.
+# Systems
 
+## Room: 
+This system is designed off of the 1993 Link's Awakening Game. It is deigned so that throughout the game are "Rooms" and each room contains objects that must stay within that room. The system is focused on the logic that happens to make room switching seamless without changing scenes
 
-# Working with the Content
-In order to develop, the developer should know the following quirks and requirements for general functionality
+## Turn Battle:
+This system is designed to allow for a list of "players" to be in a list for a battle. Their order is deiceded based on an equation. This system also includes basic UI used in the debugging.
 
-## Player:
-The Player can be added to much like any player character. To add functionality add to either PlayerController or to PlayerMovement
+## Active Battle: (WIP)
+This system is designed to imitate the Ability System of Final Fantasy XIV where a user has a hotbar of actions that perform actions
 
-## World:
-To create a new room prefab, create a prefab Variant of the Room Template. To add respawnable objects to the new room, you need to add an ObjectSpawner for it. In the object spawner, you will add the prefab of the object you want at that location. Whenever the room is enabled, the object will be re-instantiated. After making the objectSpawner in the room, you need to add it to the list of spawners contained within the Room script. The room script handles all of the calling of functions within rooms. 
+## Weapon: (WIP)
+This is a 2D weapon system designed for the developer to customize the size of a weapons coverage on a per weapon basis rather tahn per weapon type
 
-## Core:
-You shouldn't need to edit the Core.
+## Class: (WIP)
+This small system is about a player having multiple classes that contain different attributes and abilities
