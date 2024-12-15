@@ -21,11 +21,19 @@ public class Room : MonoBehaviour
     [SerializeField] private Room leftRoom;
     [SerializeField] private Room rightRoom;
 
+    public Room roomAbove { get { return upRoom; } }
+    public Room roomBelow { get { return downRoom; } }
+    public Room roomLeft { get { return leftRoom; } }
+    public Room roomRight { get { return rightRoom; } }
+
+    private RoomStatus currentRoomStatus = RoomStatus.Disabled;
+
+
+
+
     //[Header("Room Details")]
 
     public Bounds roomBounds;
-
-    bool isLoaded;
 
     //The distances from the center to the end in x and y
     public static Vector2 roomSize
@@ -40,8 +48,6 @@ public class Room : MonoBehaviour
     {
 
         ResetRoom();
-
-        isLoaded = false;
 
         roomBounds = new Bounds(transform.position, roomSize);
 
@@ -89,6 +95,8 @@ public class Room : MonoBehaviour
 
     public void DisableRoom()
     {
+        //Only disable if we are currently enabled
+        if(currentRoomStatus != RoomStatus.Enabled) {  return; } 
 
         //Tell the room to reset itself
         ResetRoom();
@@ -98,12 +106,14 @@ public class Room : MonoBehaviour
             respawnableItemsInScene[i].DisableObject();
         }
 
+        currentRoomStatus = RoomStatus.Disabled;
 
     }
 
     public void EnableRoom()
     {
-        
+        //If we are already enabled don't re-enable it
+        if(currentRoomStatus == RoomStatus.Enabled) { return; }
 
         //Enable all objects within the room
         for (int i = 0; i < respawnableItemsInScene.Count; i++)
@@ -111,58 +121,7 @@ public class Room : MonoBehaviour
             respawnableItemsInScene[i].EnableObject();
         }
 
-
-
-        //Debug.Log("Room Enabled");
-    }
-
-    public void EnableNeighboringRooms()
-    {
-
-        if(upRoom != null)
-        {
-            upRoom.EnableRoom();
-        }
-        if (downRoom != null)
-        {
-            downRoom.EnableRoom();
-        }
-        if (leftRoom != null)
-        {
-            leftRoom.EnableRoom();
-        }
-        if (rightRoom != null)
-        {
-            rightRoom.EnableRoom();
-        }
-
-        
-        
-        
-
-    }
-
-    public void DisableNeighboringRooms(Direction directionMovedTo)
-    {
-
-        if(directionMovedTo!=Direction.Up && upRoom != null)
-        {
-            upRoom.DisableRoom();
-        }
-        if (directionMovedTo != Direction.Down && downRoom != null)
-        {
-            downRoom.DisableRoom();
-        }
-        if (directionMovedTo != Direction.Left && leftRoom != null)
-        {
-            leftRoom.DisableRoom();
-        }
-        if (directionMovedTo != Direction.Right && rightRoom != null)
-        {
-            rightRoom.DisableRoom();
-        }
-
-
+        currentRoomStatus = RoomStatus.Enabled; 
     }
 
     #endregion
@@ -171,12 +130,20 @@ public class Room : MonoBehaviour
     #region Activate/Deactivate
     public void ActivateRoom()
     {
+        //Don't activate if we are already active
+        if(currentRoomStatus == RoomStatus.Active) { return; }
+
         ActivateRoomObjects();
+
+        currentRoomStatus = RoomStatus.Active;
+
     }
 
     public void DeactivateRoom()
     {
-        Debug.Log("Deactivate 2");
+        //Only Deactivate if we are active
+        if(currentRoomStatus != RoomStatus.Active) { return;}
+
         DeactivateRoomObjects();
         Debug.Log("Deactivate 3");
     }
@@ -202,5 +169,11 @@ public class Room : MonoBehaviour
     #endregion
     #endregion
 
+    private enum RoomStatus
+    {
+        Active,
+        Enabled,
+        Disabled
+    }
 
 }

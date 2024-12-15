@@ -58,13 +58,13 @@ public class RoomManager : MonoBehaviour
         currentRoom.DeactivateRoom();
 
         //Disable our neighbors except for the one we are going into
-        currentRoom.DisableNeighboringRooms(direction);
+        DisableNeighboringRooms(currentRoom, direction);
 
         //Update CurrentRoom
         currentRoom = currentRoom.GetRoomFromDirection(direction);
 
         //Enable the rooms neighboring us
-        currentRoom.EnableNeighboringRooms();
+        EnableNeighboringRooms(currentRoom);
 
         //Debug.Log("Changing Rooms");
 
@@ -96,4 +96,56 @@ public class RoomManager : MonoBehaviour
             currentRoom.DeactivateRoom();
         }
     }
+
+
+    public void EnableNeighboringRooms(Room currentRoom)
+    {
+
+        if (currentRoom.roomAbove != null)
+        {
+            currentRoom.roomAbove.EnableRoom();
+        }
+        if (currentRoom.roomBelow != null)
+        {
+            currentRoom.roomBelow.EnableRoom();
+        }
+        if (currentRoom.roomLeft != null)
+        {
+            currentRoom.roomLeft.EnableRoom();
+        }
+        if (currentRoom.roomRight != null)
+        {
+            currentRoom.roomRight.EnableRoom();
+        }
+
+
+
+
+
+    }
+
+    public void DisableNeighboringRooms(Room currentRoom, Direction directionMovedTo)
+    {
+
+        if (directionMovedTo != Direction.Up && currentRoom.roomAbove != null)
+        {
+            currentRoom.roomAbove.DisableRoom();
+        }
+        if (directionMovedTo != Direction.Down && currentRoom.roomBelow != null)
+        {
+            currentRoom.roomBelow.DisableRoom();
+        }
+        if (directionMovedTo != Direction.Left && currentRoom.roomLeft != null)
+        {
+            currentRoom.roomLeft.DisableRoom();
+        }
+        if (directionMovedTo != Direction.Right && currentRoom.roomRight != null)
+        {
+            currentRoom.roomRight.DisableRoom();
+        }
+
+
+    }
+
+
 }
