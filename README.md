@@ -2,7 +2,7 @@
 ## Unity Game System Demos
 
 # Content
-Each system is deisgned to work independently of the others
+Each system is designed to work independently of the others
 
 Systems are designed to be exported as a package into other projects for quick adaptation
 
