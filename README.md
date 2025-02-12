@@ -18,7 +18,7 @@ This system is designed to allow for a list of "players" to be in a list for a b
 This system is designed to imitate the Ability System of Final Fantasy XIV where a user has a hotbar of actions that perform actions
 
 ## Weapon: (WIP)
-This is a 2D weapon system designed for the developer to customize the size of a weapons coverage on a per weapon basis rather tahn per weapon type
+This is a 2D weapon system designed for the developer to customize the size of a weapons coverage on a per weapon basis rather than per weapon type
 
 ## Class: (WIP)
 This small system is about a player having multiple classes that contain different attributes and abilities
